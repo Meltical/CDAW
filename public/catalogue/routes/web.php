@@ -25,3 +25,7 @@ Route::get('listeFilms', function () {
     return view("listfilms");
 });
 
+Route::get('bootstrap', function () {
+    return view("bootstrap");
+});
+
