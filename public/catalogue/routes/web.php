@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('name/{firstname?}/{lastname?}', function ($firstname="Victor", $lastname="Deliege") {
     return 'Hello ' .$firstname . " " .$lastname;
 });
+
+Route::get('movie/{title}', function ($title) {
+    return "The title of the movie is : " .$title;
+})->where(['title' => '[A-Za-z]+']);
