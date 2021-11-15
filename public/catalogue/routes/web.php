@@ -20,3 +20,8 @@ Route::get('name/{firstname?}/{lastname?}', function ($firstname="Victor", $last
 Route::get('movie/{title}', function ($title) {
     return "The title of the movie is : " .$title;
 })->where(['title' => '[A-Za-z]+']);
+
+Route::get('listeFilms', function () {
+    return view("listfilms");
+});
+
