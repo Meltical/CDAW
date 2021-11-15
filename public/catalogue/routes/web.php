@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('name/{firstname?}/{lastname?}', function ($firstname="Victor", $lastname="Deliege") {
+    return 'Hello ' .$firstname . " " .$lastname;
 });
