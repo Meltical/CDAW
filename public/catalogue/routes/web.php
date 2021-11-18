@@ -21,11 +21,8 @@ Route::get('movie/{title}', function ($title) {
     return "The title of the movie is : " .$title;
 })->where(['title' => '[A-Za-z]+']);
 
-Route::get('listeFilms', function () {
-    return view("listfilms");
-});
-
 Route::get('bootstrap', function () {
     return view("bootstrap");
 });
 
+Route::get('listeFilms', 'App\Http\controllers\listeMediasController@getListeMedias');
