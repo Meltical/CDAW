@@ -13,16 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('name/{firstname?}/{lastname?}', function ($firstname="Victor", $lastname="Deliege") {
-    return 'Hello ' .$firstname . " " .$lastname;
-});
-
-Route::get('movie/{title}', function ($title) {
-    return "The title of the movie is : " .$title;
-})->where(['title' => '[A-Za-z]+']);
-
 Route::get('bootstrap', function () {
     return view("bootstrap");
 });
 
-Route::get('listeFilms', 'App\Http\controllers\listeMediasController@getListeMedias');
+Route::get('media/{id}', function ($id) {
+    return "The title of the movie is : " .$id;
+})->where(['id' => '^\d+$']);
+
+Route::get('listeMedias', 'App\Http\controllers\listeMediasController@showListeMedias');
+Route::get('addMedia', 'App\Http\controllers\listeMediasController@showAddMedia');
