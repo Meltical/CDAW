@@ -14,16 +14,27 @@ class Media extends Model
 
     protected $guarded = [];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(category::class, "category_id");
     }
 
-    public static function create($data){
+    public static function create($data)
+    {
         return DB::table('medias')->insertGetId([
             'title' => $data["title"],
-            // 'description' => $data["description"],
-            // 'category_id' => $data["category_id"],
-            // 'image' => $data["image"]
+            'description' => $data["description"],
+            'category_id' => $data["category_id"],
+            'image' => $data["image"]
         ]);
+    }
+
+    public static function getWithCategory($id)
+    {
+        return DB::table('medias')
+            ->join('categories', 'medias.category_id', '=', 'categories.id')
+            ->where('medias.id', '=', $id)
+            ->select('medias.*', 'categories.name as category_name')
+            ->get();
     }
 }

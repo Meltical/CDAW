@@ -18,8 +18,16 @@ Route::get('bootstrap', function () {
 });
 
 Route::get('media/{id}', function ($id) {
-    return "The title of the movie is : " .$id;
+    return "The title of the movie is : " . $id;
 })->where(['id' => '^\d+$']);
 
+Route::get('media/{id}', 'App\Http\controllers\listeMediasController@showMedia')->where(['id' => '^\d+$']);
 Route::get('listeMedias', 'App\Http\controllers\listeMediasController@showListeMedias');
+
 Route::get('addMedia', 'App\Http\controllers\listeMediasController@showAddMedia');
+Route::post('addMedia', 'App\Http\controllers\listeMediasController@addMedia');
+
+Route::get('updateMedia/{id}', 'App\Http\controllers\listeMediasController@showUpdateMedia')->where(['id' => '^\d+$']);
+Route::post('updateMedia/{id}', 'App\Http\controllers\listeMediasController@updateMedia')->where(['id' => '^\d+$']);
+
+Route::delete('delete/{id}', 'App\Http\controllers\listeMediasController@deleteMedia')->where(['id' => '^\d+$']);

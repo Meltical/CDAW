@@ -33,7 +33,7 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link px-3 active" href="#">Anime <span class="sr-only">(current)</span></a>
+          <a onclick="window.location.href='{{url('listeMedias')}}'" class="nav-item nav-link px-3 active" href="#">Anime <span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link px-3" href="#">Manga</a>
           <a class="nav-item nav-link px-3" href="#">Search</a>
           <a class="nav-item nav-link ps-3" href="#">Se Connecter</a>
