@@ -8,6 +8,13 @@ RUN apt-get update && apt-get upgrade -y \
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends git net-tools \
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+    
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    npm
+RUN npm install npm@latest -g && \
+    npm install n -g && \
+    n latest
 
 # PHP
 RUN docker-php-ext-install mysqli pdo pdo_mysql && a2enmod rewrite
