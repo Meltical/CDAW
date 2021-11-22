@@ -12,6 +12,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # PHP
 RUN docker-php-ext-install mysqli pdo pdo_mysql && a2enmod rewrite
 
+RUN apt-get install zip unzip php-zip
 
 # Install composer
 # COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
