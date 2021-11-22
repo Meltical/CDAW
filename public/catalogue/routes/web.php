@@ -40,3 +40,7 @@ Route::post('addMedia', [listeMediasController::class, 'addMedia']);
 Route::get('media/{id}', [listeMediasController::class, 'showMedia'])->where([
     'id' => '^\d+$',
 ]);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
