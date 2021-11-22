@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\listeMediasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,21 +14,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('bootstrap', function () {
-    return view("bootstrap");
+Route::get('template', function () {
+    return view('template');
 });
 
-Route::get('media/{id}', function ($id) {
-    return "The title of the movie is : " . $id;
-})->where(['id' => '^\d+$']);
+Route::get('listeMedias', [listeMediasController::class, 'showListeMedias']);
 
-Route::get('media/{id}', 'App\Http\controllers\listeMediasController@showMedia')->where(['id' => '^\d+$']);
-Route::get('listeMedias', 'App\Http\controllers\listeMediasController@showListeMedias');
+Route::delete('delete/{id}', [
+    listeMediasController::class,
+    'deleteMedia',
+])->where(['id' => '^\d+$']);
 
-Route::get('addMedia', 'App\Http\controllers\listeMediasController@showAddMedia');
-Route::post('addMedia', 'App\Http\controllers\listeMediasController@addMedia');
+Route::get('updateMedia/{id}', [
+    listeMediasController::class,
+    'showUpdateMedia',
+])->where(['id' => '^\d+$']);
+Route::post('updateMedia/{id}', [
+    listeMediasController::class,
+    'updateMedia',
+])->where(['id' => '^\d+$']);
 
-Route::get('updateMedia/{id}', 'App\Http\controllers\listeMediasController@showUpdateMedia')->where(['id' => '^\d+$']);
-Route::post('updateMedia/{id}', 'App\Http\controllers\listeMediasController@updateMedia')->where(['id' => '^\d+$']);
+Route::get('addMedia', [listeMediasController::class, 'showAddMedia']);
+Route::post('addMedia', [listeMediasController::class, 'addMedia']);
 
-Route::delete('delete/{id}', 'App\Http\controllers\listeMediasController@deleteMedia')->where(['id' => '^\d+$']);
+Route::get('media/{id}', [listeMediasController::class, 'showMedia'])->where([
+    'id' => '^\d+$',
+]);
