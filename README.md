@@ -8,7 +8,7 @@
 - vscode remote container extension - https://code.visualstudio.com/docs/remote/containers
 - create a github account
 
-## How to use this template?
+## How to use this template
 
 1. go to https://github.com/ceri-num/uv-cdaw-template
 2. click on the green button "use this template". This will create a similar git repository on your account
