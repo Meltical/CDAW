@@ -7,3 +7,12 @@
 .custom-top {
     margin-top: 10vh;
 }
+
+.container {
+    max-width: 1080px;
+}
+
+.profile-cover-image {
+    width: 780px;
+    height: 250px;
+}

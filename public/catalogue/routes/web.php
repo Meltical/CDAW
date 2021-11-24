@@ -27,6 +27,10 @@ Route::get('test', function () {
     return view('test');
 });
 
+Route::get('profile', function () {
+    return view('profile');
+});
+
 Route::get('details', function () {
     return view('details');
 });
