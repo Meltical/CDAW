@@ -19,6 +19,10 @@ Route::get('template', function () {
     return view('template');
 });
 
+Route::get('create', function () {
+    return view('create');
+});
+
 Route::get('test', function () {
     return view('test');
 });
