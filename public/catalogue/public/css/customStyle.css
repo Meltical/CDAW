@@ -1,0 +1,18 @@
+.profile {
+    background-image: url("https://45secondes.fr/wp-content/uploads/2021/05/Y-aura-t-il-Komi-san-wa-Comyushou-Anime-Adaptation-Tout-ce-que.png");
+    background-size: cover;
+    background-position-y: -5px;
+}
+
+.custom-top {
+    margin-top: 10vh;
+}
+
+.container {
+    max-width: 1080px;
+}
+
+.profile-cover-image {
+    width: 780px;
+    height: 250px;
+}
