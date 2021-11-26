@@ -1,0 +1,80 @@
+Requêtes utiles au projet 
+    
+    • Création d'un compte utilisateur.
+        INSERT INTO `users` (`id`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`, `lastname`, `firstname`, `username`, `role`, `disabled`) VALUES (NULL, 'email@email.com', NULL, 'hashpassword', NULL, NULL, NULL, NULL, '/path/to/photo', '2021-11-26 19:16:03', NULL, 'LastName', 'FirstName', 'UserName', 'User', '0');
+    
+    • Mettre à jour son profil (avatar, nom, prénom, pseudo, email). 
+        UPDATE `users` SET `email` = 'email2@email2.com', `email_verified_at` = NULL, `password` = 'hashpassword2', `profile_photo_path` = '/path/to/photo2', `updated_at` = NULL, `lastname` = 'LastName2', `firstname` = 'FirstName2', `username` = 'UserName2' WHERE `users`.`id` = 21; 
+    
+    • Rechercher les média disponibles par nom ou par type et ordonner le résultat. 
+        SELECT * FROM `medias` WHERE `title` LIKE '%alien%' ORDER BY `title` ASC 
+    
+    • Marquer un média comme vu. 
+        INSERT INTO `history` (`id`, `media_id`, `user_id`, `liked`, `endTime`, `created_at`, `updated_at`) VALUES (NULL, '36', '21', '0', '2021-11-26 20:23:03', '2021-11-26 19:23:03', NULL);
+    
+    • Attribuer un "j'aime" à un média. 
+        INSERT INTO `history` (`id`, `media_id`, `user_id`, `liked`, `endTime`, `created_at`, `updated_at`) VALUES (NULL, '36', '21', '1', '2021-11-26 20:23:03', '2021-11-26 19:23:03', NULL);
+    
+    • Consulter son historique de visionnage par date. 
+        SELECT * FROM `history` WHERE `user_id` = 21 ORDER BY `created_at` ASC 
+    
+    • Bloquer un compte utilisateur. 
+        UPDATE `users` SET `email_verified_at` = NULL, `updated_at` = NULL, `disabled` = '1' WHERE `users`.`id` = 21; 
+    
+    • Créer une playlist et y ajouter des médias. 
+        INSERT INTO `user_playlist` (`id`, `name`, `user_id`, `created_at`, `updated_at`) VALUES (NULL, 'Nouvelle Playlist', '21', '2021-11-26 19:25:02', NULL);
+        INSERT INTO `media_playlist` (`id`, `playlist_id`, `media_id`, `created_at`, `updated_at`) VALUES (NULL, '4', '120', '2021-11-26 19:25:32', NULL);
+    
+    • Ajouter un commentaire à un média. 
+        INSERT INTO `comments` (`id`, `user_id`, `media_id`, `text`, `created_at`, `updated_at`) VALUES (NULL, '21', '135', 'Commentaire', '2021-11-26 19:26:34', NULL);
+    
+    • Consulter tous les commentaires d'un utilisateur donné. 
+        SELECT * FROM `comments` WHERE `user_id` = 21 
+    
+    • Promouvoir un utilisateur au rang de modérateur. 
+        UPDATE `users` SET `email_verified_at` = NULL, `updated_at` = NULL, `role` = 'Moderator' WHERE `users`.`id` = 21; 
+
+Page de statistiques 
+    
+    • Liste des 10 médias les plus consultés avec le nombre de vues associées. Afficher en ordre descendant. 
+        SELECT medias.title, COUNT(*) AS Vues FROM history 
+        INNER JOIN medias ON media_id = medias.id 
+        GROUP BY medias.id 
+        ORDER BY Vues DESC 
+        LIMIT 10; 
+    
+    • Liste des médias non consultés. 
+        SELECT medias.title FROM medias 
+        LEFT JOIN history ON medias.id = history.media_id 
+        WHERE history.media_id IS NULL
+    
+    • Nombre de consultations de médias par jours sur une période donnée (dates début et fin). 
+        SELECT SUBQUERY.Date, SUM(SUBQUERY.Vues) FROM (
+            SELECT DAYOFYEAR(history.created_at) AS Date, medias.title AS title, COUNT(*) AS Vues FROM history 
+            INNER JOIN medias ON history.media_id = medias.id 
+            WHERE history.created_at BETWEEN "2021/11/25" AND "2021/11/27"
+            GROUP BY DAYOFYEAR(history.created_at), medias.id
+            ) AS SUBQUERY
+        GROUP BY SUBQUERY.Date
+        ORDER BY SUBQUERY.Date ASC
+    
+    • Nombre de commentaires saisis par jours sur une période donnée (dates début et fin).
+        SELECT DAYOFYEAR(comments.created_at) AS Date, COUNT(*) FROM comments
+        WHERE comments.created_at BETWEEN '2021-11-21 20:58:54.000000' AND '2021-11-30 20:58:54.000000'
+        GROUP BY DAYOFYEAR(comments.created_at)
+        ORDER BY Date ASC
+    
+    • Top 100 des utilisateurs ayant consulté des médias : 
+        o Par nombre de lectures. 
+            SELECT users.username, COUNT(*) AS Vues FROM history
+            INNER JOIN users ON user_id = users.id
+            GROUP BY users.username
+            ORDER BY Vues DESC
+            LIMIT 100
+            
+        o Par temps de lecture (rajouter ce qu’il faut pour le trouver).
+            SELECT users.username, SUM(history.endTime - history.created_at) AS TimeSpent FROM history
+            INNER JOIN users ON user_id = users.id
+            GROUP BY users.username
+            ORDER BY TimeSpent DESC
+            LIMIT 100
