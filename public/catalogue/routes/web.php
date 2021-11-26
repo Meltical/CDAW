@@ -19,6 +19,22 @@ Route::get('template', function () {
     return view('template');
 });
 
+Route::get('create', function () {
+    return view('create');
+});
+
+Route::get('test', function () {
+    return view('test');
+});
+
+Route::get('profile', function () {
+    return view('profile');
+});
+
+Route::get('details', function () {
+    return view('details');
+});
+
 Route::get('listeMedias', [listeMediasController::class, 'showListeMedias']);
 
 Route::delete('delete/{id}', [
