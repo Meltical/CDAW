@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMediasTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMediasTable extends Migration
      */
     public function up()
     {
-        Schema::create('medias', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId("category_id")->constrained("categories");
-            $table->string("title");
-            // $table->string("description");
-            $table->string("image");
+            $table->foreignId("user_id")->constrained("users")->on('users')->onDelete('cascade');
+            $table->foreignId("media_id")->constrained("medias")->on('medias')->onDelete('cascade');
+            $table->string("text");
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateMediasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medias');
+        Schema::dropIfExists('comments');
     }
 }
