@@ -29,7 +29,7 @@ Route::get('test', function () {
 
 Route::get('profile', function () {
     return view('profile');
-});
+})->middleware('auth');
 
 Route::get('details', function () {
     return view('details');
