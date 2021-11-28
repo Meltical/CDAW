@@ -1,34 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./1.css">
+    <meta charset="utf-8">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background: yellow;
+        }
+    </style>
 </head>
 
 <body>
-    <table>
-        <tr>
-            <th colspan="3"><em>MediaType</em> : Click on the media you want to add/remove</th>
-        </tr>
-        <tr>
-            <td class="media"><strong>M1</strong><br>Title<br>Descr<br>Img</td>
-            <td class="media"><strong>M2</strong><br>Title<br>Descr<br>Img</td>
-            <td class="media"><strong>M3</strong><br>Title<br>Descr<br>Img</td>
-        </tr>
-        <tr>
-            <td class="media"><strong>M4</strong><br>Title<br>Descr<br>Img</td>
-            <td class="media"><strong>M5</strong><br>Title<br>Descr<br>Img</td>
-            <td class="media"><strong>M6</strong><br>Title<br>Descr<br>Img</td>
-        </tr>
-        <tr>
-            <td class="media"><strong>M7</strong><br>Title<br>Descr<br>Img</td>
-            <td class="media"><strong>M8</strong><br>Title<br>Descr<br>Img</td>
-            <td class="media"><strong>M9</strong><br>Title<br>Descr<br>Img</td>
-        </tr>
+    <table id="grid">
+        <thead>
+            <tr>
+                <th data-type="number">ID</th>
+                <th data-type="string">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>7</td>
+                <td>John</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Pete</td>
+            </tr>
+            <tr>
+                <td>36</td>
+                <td>Ann</td>
+            </tr>
+            <tr>
+                <td>87</td>
+                <td>Eugene</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Ilya</td>
+            </tr>
+        </tbody>
     </table>
 </body>
-<script src="4.js"></script>
+<script src="./4.js"></script>
 
 </html>
