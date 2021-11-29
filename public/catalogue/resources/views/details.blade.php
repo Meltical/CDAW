@@ -31,18 +31,18 @@
                     <i class="fas fa-chevron-left"></i>
                     <span class="block text-sm tracking-widest">BACK</span>
                 </a>
-                <h1 class="text-3xl font-bold mt-8">Komi-san wa, Comyushou desu</h1>
+                <h1 class="text-3xl font-bold mt-8">{{ $media->title }}</h1>
                 <div class="my-4">
                     <span class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">comedy</span>
                     <span class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">school</span>
                 </div>
-                <p class="leading-6 tracking-wider text-sm">It's Shouko Komi's first day at the prestigious Itan Private High School, and she has already risen to the status of the school's Madonna. With long black hair and a tall, graceful appearance, she captures the attention of anyone who comes across her. There's just one problem though—despite her popularity, Shouko is terrible at communicating with others.</p>
-                <button class="bg-red-500 rounded-lg mt-10 px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
+                <p class="mb-10 leading-6 tracking-wider text-sm">{{ $media->description}}</p>
+                <a href="{{ $media->trailerUrl }}" target="_blank" class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
                     <i class="fas fa-play text-sm mr-3"></i>
                     <span class="text-sm">
                         Watch Trailer
                     </span>
-                </button>
+                </a>
                 <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
                     <i class="fas fa-edit text-gray-600"></i>
                 </button>
@@ -51,7 +51,7 @@
                 </button>
             </div>
             <div class="custom-top">
-                <img class="w-64 rounded shadow-lg" src="https://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpghttps://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpg" alt="poster">
+                <img class="w-64 rounded shadow-lg" src="{{ $media->imageUrl }}" alt="poster">
             </div>
         </section>
     </div>

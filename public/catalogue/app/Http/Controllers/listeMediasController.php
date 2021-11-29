@@ -12,8 +12,8 @@ class listeMediasController extends Controller
 {
     public function showListeMedias()
     {
-        $medias = Media::with("category")->get();
-        return view('listemedias')->with('medias', $medias);
+        $medias = Media::all();
+        return view('home')->with('medias', $medias);
     }
 
     public function showAddMedia()
@@ -73,8 +73,8 @@ class listeMediasController extends Controller
 
     public function showMedia($id)
     {
-        $media = Media::getWithCategory($id)->firstOrFail(); //TODO: Support errors
-        return view('media')->with('media', $media);
+        $media = Media::findOrFail($id);
+        return view('details')->with('media', $media);
     }
 
     public function deleteMedia($id)
