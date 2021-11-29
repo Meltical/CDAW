@@ -15,10 +15,11 @@ class CreateMediasTable extends Migration
     {
         Schema::create('medias', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId("category_id")->constrained("categories");
             $table->string("title");
-            // $table->string("description");
-            $table->string("image");
+            $table->string("description");
+            $table->string("imageUrl");
+            $table->string("trailerUrl");
+            $table->enum('type', ['Anime', 'Manga']);
             $table->timestamps();
         });
     }

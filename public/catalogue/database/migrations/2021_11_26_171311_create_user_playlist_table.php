@@ -15,8 +15,8 @@ class CreateUserPlaylistTable extends Migration
     {
         Schema::create('user_playlist', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("playlist_id")->constrained("playlists");
             $table->timestamps();
         });
     }

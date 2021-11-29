@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateHistoryTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class UpdateHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::table('history', function (Blueprint $table) {
-            $table->renameColumn('duration', 'endTime');
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
         });
     }
 
@@ -25,5 +26,6 @@ class UpdateHistoryTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('tags');
     }
 }

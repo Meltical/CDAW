@@ -25,7 +25,7 @@ class Media extends Model
             'title' => $data["title"],
             'description' => $data["description"],
             'category_id' => $data["category_id"],
-            'image' => $data["image"]
+            'imageUrl' => $data["imageUrl"]
         ]);
     }
 

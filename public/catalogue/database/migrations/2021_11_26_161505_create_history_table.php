@@ -18,7 +18,7 @@ class CreateHistoryTable extends Migration
             $table->foreignId("media_id")->constrained("medias");
             $table->foreignId("user_id")->constrained("users");
             $table->boolean('liked');
-            $table->timestamp('duration');
+            $table->timestamp('endTime');
             $table->timestamps();
         });
     }

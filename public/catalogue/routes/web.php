@@ -19,12 +19,20 @@ Route::get('template', function () {
     return view('template');
 });
 
-Route::get('create', function () {
-    return view('create');
+Route::get('/', function () {
+    return view('home');
 });
 
-Route::get('test', function () {
-    return view('test');
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->middleware(['guest'])
+    ->name('register');
+
+
+
+
+
+Route::get('create', function () {
+    return view('create');
 });
 
 Route::get('profile', function () {
@@ -46,6 +54,7 @@ Route::get('updateMedia/{id}', [
     listeMediasController::class,
     'showUpdateMedia',
 ])->where(['id' => '^\d+$']);
+
 Route::post('updateMedia/{id}', [
     listeMediasController::class,
     'updateMedia',
@@ -61,7 +70,3 @@ Route::get('media/{id}', [listeMediasController::class, 'showMedia'])->where([
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-
-Route::get('/register', [RegisteredUserController::class, 'create'])
-    ->middleware(['guest'])
-    ->name('register');
