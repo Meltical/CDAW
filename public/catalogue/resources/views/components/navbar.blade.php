@@ -21,7 +21,7 @@
                      <a href="#">Settings</a>
                  </li>
                  <li>
-                     <a class="text-sm text-gray-700 italic" href="#">Help and feedback</a>
+                     <a class="text-sm text-gray-700 italic" href="https://github.com/MikUwU/CDAW/issues" target="_blank">Help and feedback</a>
                  </li>
              </ul>
          </div>
