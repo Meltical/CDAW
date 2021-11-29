@@ -55,11 +55,11 @@
         <section class="h-screen flex justify-center gap-32 flex-grow p-10 bg-gray-100">
             <div>
                 <img class="profile-cover-image border rounded-t-2xl shadow-xl object-cover" src="https://furansujapon.com/wp-content/uploads/2021/05/Komi-san-wa-Komyushou-Desu.jpg" alt="cover">
-                <div class="flex justify-between mt-4">
+                <div class="flex justify-between my-4">
                     <div class="flex gap-6">
                         <img class="rounded-full border-4 border-white ml-3 -mt-16 w-36 h-36 object-cover" src="https://45secondes.fr/wp-content/uploads/2021/05/Y-aura-t-il-Komi-san-wa-Comyushou-Anime-Adaptation-Tout-ce-que.png" alt="komi profile">
                         <div>
-                            <span class="block font-bold text-2xl">Victor Deliege</span>
+                            <span class="block font-bold text-2xl text-gray-800">Victor Deliege</span>
                             <span class="block text-gray-600 text-sm">victor.deliege@etu.imt-nord-europe.fr</span>
                         </div>
                     </div>
@@ -68,6 +68,27 @@
                         <span class="text-white text-sm">Edit Profile</span>
                     </button>
                 </div>
+                <a href="#" class="block flex justify-between items-center bg-white rounded-lg mt-10 p-6 shadow-md">
+                    <div class="flex items-center gap-4">
+                        <i class="far fa-list-alt text-lg text-green-400"></i>
+                        <span class="font-bold text-gray-700">Playlist</span>
+                    </div>
+                    <i class="fas fa-arrow-right text-lg text-gray-600"></i>
+                </a>
+                <a href="#" class="block flex justify-between items-center bg-white rounded-lg mt-6 p-6 shadow-md">
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-heart text-lg text-red-400"></i>
+                        <span class="font-bold text-gray-700">Liked</span>
+                    </div>
+                    <i class="fas fa-arrow-right text-lg text-gray-600"></i>
+                </a>
+                <a href="#" class="block flex justify-between items-center bg-white rounded-lg mt-6 p-6 shadow-md">
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-history text-lg text-yellow-400"></i>
+                        <span class="font-bold text-gray-700">History</span>
+                    </div>
+                    <i class="fas fa-arrow-right text-lg text-gray-600"></i>
+                </a>
             </div>
         </section>
     </div>
