@@ -22,40 +22,12 @@
 <body>
     <div class="flex">
         <!-- sidebar -->
-        <section class="flex flex-col h-screen">
-            <div class="flex justify-center items-center h-64 border">
-                <div class="flex flex-col justify-center items-center">
-                    <div class="w-20 h-20 rounded-full mb-4 profile"></div>
-                    <span>Komi</span>
-                </div>
-            </div>
-            <div class="flex flex-grow justify-center border-r">
-                <div class="p-14">
-                    <ul class="flex flex-col gap-4 whitespace-nowrap">
-                        <li>
-                            <a class="text-red-500 text-lg font-bold" href="#">Discover</a>
-                        </li>
-                        <li>
-                            <a href="#">Library</a>
-                        </li>
-                        <li>
-                            <a href="#">Notification</a>
-                        </li>
-                        <li>
-                            <a href="#">Settings</a>
-                        </li>
-                        <li>
-                            <a class="text-sm text-gray-700 italic" href="#">Help and feedback</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <x-navbar />
 
         <!-- main content-->
         <section class="h-screen flex justify-center gap-32 flex-grow p-10 bg-gray-100">
             <div class="w-1/2 custom-top">
-                <a class="flex gap-4 items-center" href="{{ URL::to('test') }}">
+                <a class="flex gap-4 items-center" href="{{ URL::to('/') }}">
                     <i class="fas fa-chevron-left"></i>
                     <span class="block text-sm tracking-widest">BACK</span>
                 </a>

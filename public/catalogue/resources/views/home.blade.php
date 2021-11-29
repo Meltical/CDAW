@@ -22,35 +22,7 @@
 <body>
     <div class="flex">
         <!-- sidebar -->
-        <section class="flex flex-col h-screen">
-            <div class="flex justify-center items-center h-64 border">
-                <div class="flex flex-col justify-center items-center">
-                    <div class="w-20 h-20 rounded-full mb-4 profile"></div>
-                    <span>Komi</span>
-                </div>
-            </div>
-            <div class="flex flex-grow justify-center border-r">
-                <div class="p-14">
-                    <ul class="flex flex-col gap-4 whitespace-nowrap">
-                        <li>
-                            <a class="text-red-500 text-lg font-bold" href="#">Discover</a>
-                        </li>
-                        <li>
-                            <a href="#">Library</a>
-                        </li>
-                        <li>
-                            <a href="#">Notification</a>
-                        </li>
-                        <li>
-                            <a href="#">Settings</a>
-                        </li>
-                        <li>
-                            <a class="text-sm text-gray-700 italic" href="#">Help and feedback</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <x-navbar />
 
         <!-- main content-->
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
@@ -63,12 +35,8 @@
 
             <div class="flex flex-wrap gap-12">
                 <!-- card -->
-                <a class="flex flex-col group cursor-pointer" href="{{ URL::to('details') }}">
-                    <img class="w-40 border-4 border-white rounded group-hover:shadow-lg" src="https://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpghttps://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpg" alt="komi san">
-                    <h3 class="mt-3">Komi san</h3>
-                    <span class="text-sm text-gray-500">test</span>
-                </a>
-
+                <x-card title="Komi San" subtitle="can't talk" image_url="https://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpghttps://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpg" />
+                <x-card title="Takt op destiny" subtitle="cool" image_url="https://m.media-amazon.com/images/M/MV5BMjU2YTg2MjgtODk0ZC00NGI4LWJmZmItNmM2MDkwYzQ4YTBhXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_FMjpg_UX1000_.jpg" />
             </div>
         </section>
     </div>
