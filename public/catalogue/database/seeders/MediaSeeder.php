@@ -24,7 +24,7 @@ class MediaSeeder extends Seeder
         );
         $context  = stream_context_create($opts);
 
-        $json = file_get_contents("https://graphql.anilist.co/?query={%0A%20 Page(page%3A 1) {%0A%20%20%20 media(type%3A ANIME%2C sort%3A SCORE_DESC) {%0A%20%20%20%20%20 id%0A%20%20%20%20%20 title {%0A%20%20%20%20%20%20%20 english%0A%20%20%20%20%20%20%20 native%0A%20%20%20%20%20 }%0A%20%20%20%20%20 coverImage {%0A%20%20%20%20%20%20%20 large%0A%20%20%20%20%20 }%0A%20%20%20%20%20 trailer{%0A%20%20%20%20%20%20%20 id%0A%20%20%20%20%20 }%0A%20%20%20%20%20 description%0A%20%20%20%20%20 tags {%0A%20%20%20%20%20%20%20 name%0A%20%20%20%20%20 }%0A%20%20%20 }%0A%20 }%0A}%0A", false, $context);
+        $json = file_get_contents("https://graphql.anilist.co/?query={%0A%20 Page(page%3A 1) {%0A%20%20%20 media(type%3A ANIME%2C sort%3A SCORE_DESC) {%0A%20%20%20%20%20 id%0A%20%20%20%20%20 title {%0A%20%20%20%20%20%20%20 english%0A%20%20%20%20%20%20%20 native%0A%20%20%20%20%20 }%0A%20%20%20%20%20 studios {%0A%20%20%20%20%20%20%20 nodes {%0A%20%20%20%20%20%20%20%20%20 name%0A%20%20%20%20%20%20%20 }%0A%20%20%20%20%20 }%0A%20%20%20%20%20 coverImage {%0A%20%20%20%20%20%20%20 large%0A%20%20%20%20%20 }%0A%20%20%20%20%20 trailer {%0A%20%20%20%20%20%20%20 id%0A%20%20%20%20%20 }%0A%20%20%20%20%20 description%0A%20%20%20%20%20 tags {%0A%20%20%20%20%20%20%20 name%0A%20%20%20%20%20 }%0A%20%20%20 }%0A%20 }%0A}%0A", false, $context);
         $data = json_decode($json, true);
 
         $animes = [];
@@ -39,7 +39,8 @@ class MediaSeeder extends Seeder
                         "imageUrl" => $item["coverImage"]["large"],
                         "trailerUrl" => $item["trailer"] == null ? "" : "https://youtu.be/" . $item["trailer"]["id"],
                         "description" => $item["description"],
-                        "type" => 'ANIME'
+                        "type" => 'ANIME',
+                        "studio" => $item["studios"]["nodes"][0]["name"]
                     ]
                 );
                 $allTags =  array_slice($item["tags"], 0, 3);
