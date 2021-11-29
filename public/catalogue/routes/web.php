@@ -19,17 +19,11 @@ Route::get('template', function () {
     return view('template');
 });
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'listeMediasController@showListeMedias');
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware(['guest'])
     ->name('register');
-
-
-
-
 
 Route::get('create', function () {
     return view('create');
@@ -39,9 +33,8 @@ Route::get('profile', function () {
     return view('profile');
 })->middleware('auth');
 
-Route::get('details', function () {
-    return view('details');
-});
+Route::get('/details/{id}', 'listeMediasController@showMedia');
+
 
 Route::get('listeMedias', [listeMediasController::class, 'showListeMedias']);
 

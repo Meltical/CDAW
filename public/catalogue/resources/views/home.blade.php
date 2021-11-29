@@ -34,9 +34,9 @@
             </div>
 
             <div class="flex flex-wrap gap-12">
-                <!-- card -->
-                <x-card title="Komi San" subtitle="can't talk" image_url="https://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpghttps://images-na.ssl-images-amazon.com/images/I/61Vy74wnrAS.jpg" />
-                <x-card title="Takt op destiny" subtitle="cool" image_url="https://m.media-amazon.com/images/M/MV5BMjU2YTg2MjgtODk0ZC00NGI4LWJmZmItNmM2MDkwYzQ4YTBhXkEyXkFqcGdeQXVyMzgxODM4NjM@._V1_FMjpg_UX1000_.jpg" />
+                @foreach ($medias as $media)
+                <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="studio" image_url="{{ $media->imageUrl }}" />
+                @endforeach
             </div>
         </section>
     </div>
