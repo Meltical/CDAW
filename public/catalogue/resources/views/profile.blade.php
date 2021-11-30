@@ -45,7 +45,8 @@
                         <span class="text-white text-sm">Edit Profile</span>
                     </button>
                 </div>
-                <a href="#" class="block flex justify-between items-center bg-white rounded-lg mt-10 p-6 shadow-md">
+                <a href="{{ route('my_playlists') }}"
+                    class="block flex justify-between items-center bg-white rounded-lg mt-10 p-6 shadow-md">
                     <div class="flex items-center gap-4">
                         <i class="far fa-list-alt text-lg text-green-400"></i>
                         <span class="font-bold text-gray-700">Playlist</span>
