@@ -28,16 +28,14 @@
         <section class="h-screen flex justify-center gap-32 flex-grow p-10 bg-gray-100">
             <div>
                 <img class="profile-cover-image border rounded-t-2xl shadow-xl object-cover"
-                    src="https://furansujapon.com/wp-content/uploads/2021/05/Komi-san-wa-Komyushou-Desu.jpg"
-                    alt="cover">
+                    src="{{ Auth::user()->bannerUrl }}" alt="cover">
                 <div class="flex justify-between my-4">
                     <div class="flex gap-6">
                         <img class="rounded-full border-4 border-white ml-3 -mt-16 w-36 h-36 object-cover"
-                            src="https://45secondes.fr/wp-content/uploads/2021/05/Y-aura-t-il-Komi-san-wa-Comyushou-Anime-Adaptation-Tout-ce-que.png"
-                            alt="komi profile">
+                            src="{{ Auth::user()->avatarUrl }}" alt="komi profile">
                         <div>
-                            <span class="block font-bold text-2xl text-gray-800">Victor Deliege</span>
-                            <span class="block text-gray-600 text-sm">victor.deliege@etu.imt-nord-europe.fr</span>
+                            <span class="block font-bold text-2xl text-gray-800">{{ Auth::user()->name }}</span>
+                            <span class="block text-gray-600 text-sm">{{ Auth::user()->email }}</span>
                         </div>
                     </div>
                     <button class="bg-red-600 h-8 px-3 rounded hover:shadow">
@@ -45,7 +43,8 @@
                         <span class="text-white text-sm">Edit Profile</span>
                     </button>
                 </div>
-                <a href="#" class="block flex justify-between items-center bg-white rounded-lg mt-10 p-6 shadow-md">
+                <a href="{{ route('my_playlists') }}"
+                    class="block flex justify-between items-center bg-white rounded-lg mt-10 p-6 shadow-md">
                     <div class="flex items-center gap-4">
                         <i class="far fa-list-alt text-lg text-green-400"></i>
                         <span class="font-bold text-gray-700">Playlist</span>

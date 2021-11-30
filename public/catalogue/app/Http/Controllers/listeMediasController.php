@@ -11,6 +11,7 @@ use App\Models\MediaPlaylist;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class listeMediasController extends Controller
 {
@@ -30,25 +31,40 @@ class listeMediasController extends Controller
         return view('home')->with('medias', $medias)->with('title', "History");
     }
 
+    // All Playlists
     public function showPlaylistsMedias()
     {
         $playlists = Playlist::join("users", "users.id", "=", "playlists.author_id")
             ->join("media_playlist", "media_playlist.playlist_id", "=", "playlists.id")
             ->join("medias", "medias.id", "=", "media_playlist.media_id")
-            ->select("playlists.*", "users.name as authorName", "medias.imageUrl")
-            ->orderBy("media_playlist.created_at", "desc")
-            ->limit(1)
+            ->select((DB::raw("playlists.*, users.name as authorName, MIN(medias.imageUrl) as imageUrl")))
+            ->groupBy("playlists.id")
             ->get();
         return view('playlists')->with('playlists', $playlists)->with('title', "Playlists");
     }
 
+    // Display one Playlists
     public function showPlaylist($id)
     {
         $medias = MediaPlaylist::join("medias", "medias.id", "=", "media_playlist.media_id")
+            ->where("media_playlist.playlist_id", "=", $id)
             ->orderBy("media_playlist.created_at", "desc")
             ->get();
         $name = Playlist::FindOrFail($id)->name;
         return view('home')->with('medias', $medias)->with('title', $name);
+    }
+
+    // My Playlists (Created by me)
+    public function showMyPlaylistsMedias()
+    {
+        $playlists = Playlist::join("users", "users.id", "=", "playlists.author_id")
+            ->join("media_playlist", "media_playlist.playlist_id", "=", "playlists.id")
+            ->join("medias", "medias.id", "=", "media_playlist.media_id")
+            ->where("playlists.author_id", "=", Auth::user()->id)
+            ->select((DB::raw("playlists.*, users.name as authorName, MIN(medias.imageUrl) as imageUrl")))
+            ->groupBy("playlists.id")
+            ->get();
+        return view('playlists')->with('playlists', $playlists)->with('title', "My Playlists");
     }
 
     public function showLikedMedias()
