@@ -53,7 +53,7 @@ Route::get('template', function () {
     return view('template');
 });
 
-Route::get('/', 'listeMediasController@showListeMedias');
+Route::get('/', 'listeMediasController@showListeMedias')->name('home');
 
 Route::get('playlists', 'listeMediasController@showPlaylistsMedias')->middleware('auth')->name("playlists");
 Route::get('user/playlists', 'listeMediasController@showMyPlaylistsMedias')->middleware('auth')->name("my_playlists");
