@@ -19,19 +19,44 @@
      <div class="flex flex-grow justify-center border-r">
          <div class="p-14">
              <ul class="flex flex-col gap-4 whitespace-nowrap">
+                 @if(Route::currentRouteName() == 'home')
                  <li>
                      <a class="text-red-500 text-lg font-bold" href="{{ URL::to('/') }}">Discover</a>
                  </li>
+                 @else
+                 <li>
+                     <a href="{{ URL::to('/') }}">Discover</a>
+                 </li>
+                 @endif
+
                  @if (Auth::user())
+                 @if(Route::currentRouteName() == 'history')
+                 <li>
+                     <a class="text-red-500 text-lg font-bold" href="{{ route('history') }}">History</a>
+                 </li>
+                 @else
                  <li>
                      <a href="{{ route('history') }}">History</a>
                  </li>
+                 @endif
+                 @if(Route::currentRouteName() == 'likes')
+                 <li>
+                     <a class="text-red-500 text-lg font-bold" href="{{ route('likes') }}">Likes</a>
+                 </li>
+                 @else
                  <li>
                      <a href="{{ route('likes') }}">Likes</a>
                  </li>
+                 @endif
+                 @if(Route::currentRouteName() == 'playlists')
+                 <li>
+                     <a class="text-red-500 text-lg font-bold" href="{{ route('playlists') }}">Playlists</a>
+                 </li>
+                 @else
                  <li>
                      <a href="{{ route('playlists') }}">Playlists</a>
                  </li>
+                 @endif
                  @endif
                  <li>
                      <a class="text-sm text-gray-700 italic" href="https://github.com/MikUwU/CDAW/issues" target="_blank">Help and feedback</a>
