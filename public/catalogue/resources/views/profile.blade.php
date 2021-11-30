@@ -38,10 +38,10 @@
                             <span class="block text-gray-600 text-sm">{{ Auth::user()->email }}</span>
                         </div>
                     </div>
-                    <button class="bg-red-600 h-8 px-3 rounded hover:shadow">
+                    <a href="{{ route('profile.show') }}" class="block bg-red-600 h-8 px-3 rounded hover:shadow">
                         <i class="fas fa-edit text-white text-sm"></i>
                         <span class="text-white text-sm">Edit Profile</span>
-                    </button>
+                    </a>
                 </div>
                 <a href="{{ route('my_playlists') }}"
                     class="block flex justify-between items-center bg-white rounded-lg mt-10 p-6 shadow-md">
