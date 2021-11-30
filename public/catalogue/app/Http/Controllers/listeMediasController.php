@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
+use App\Models\Like;
 use App\Models\Tag;
 use App\Models\category;
 use App\Models\History;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class listeMediasController extends Controller
 {
@@ -83,9 +85,22 @@ class listeMediasController extends Controller
 
     public function showMedia($id)
     {
+        $loggedUser = Auth::user();
         $media = Media::findOrFail($id);
         $tags = Tag::where("media_id", "=", $id)->get();
-        return view('details')->with('media', $media)->with('tags', $tags);
+        if ($loggedUser) {
+            $userId = $loggedUser->id;
+            $likedMedia = Like::select('*')
+                ->where('media_id', '=', $id)
+                ->where('user_id', '=', $userId)
+                ->get();
+            if (count($likedMedia)) {
+                return view('details')->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
+            } else {
+                return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
+            }
+        }
+        return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
     }
 
     public function deleteMedia($id)

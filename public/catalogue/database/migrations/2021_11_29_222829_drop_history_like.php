@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateDescription extends Migration
+class DropHistoryLike extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class UpdateDescription extends Migration
      */
     public function up()
     {
-        Schema::table('medias', function (Blueprint $table) {
-            $table->text('description')->change();
+        //
+        Schema::table('history', function (Blueprint $table) {
+            $table->dropColumn('liked');
         });
     }
 

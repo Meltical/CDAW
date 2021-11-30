@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateDescription extends Migration
+class CreateLikeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class UpdateDescription extends Migration
      */
     public function up()
     {
-        Schema::table('medias', function (Blueprint $table) {
-            $table->text('description')->change();
+        Schema::create('like', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId("media_id")->constrained("medias");
+            $table->foreignId("user_id")->constrained("users");
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ class UpdateDescription extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('like');
     }
 }
