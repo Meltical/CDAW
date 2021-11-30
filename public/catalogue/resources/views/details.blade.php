@@ -37,18 +37,29 @@
                     <span class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">school</span>
                 </div>
                 <p class="mb-10 leading-6 tracking-wider text-sm">{{ $media->description}}</p>
-                <a href="{{ $media->trailerUrl }}" target="_blank" class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
-                    <i class="fas fa-play text-sm mr-3"></i>
-                    <span class="text-sm">
-                        Watch Trailer
-                    </span>
-                </a>
-                <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                    <i class="fas fa-edit text-gray-600"></i>
-                </button>
-                <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                    <i class="fas fa-trash-alt text-gray-600"></i>
-                </button>
+                <div class="flex gap-2">
+                    <a href="{{ $media->trailerUrl }}" target="_blank" class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
+                        <i class="fas fa-play text-sm mr-3"></i>
+                        <span class="text-sm">
+                            Watch Trailer {{ $isLiked }}
+                        </span>
+                    </a>
+                    @if ($isLiked)
+                    <a href="{{ action('LikeController@likeService', $media->id) }}" class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                        <i class="fas fa-heart text-red-500"></i>
+                    </a>
+                    @else
+                    <a href="{{ action('LikeController@likeService', $media->id) }}" class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                        <i class="far fa-heart text-gray-600"></i>
+                    </a>
+                    @endif
+                    <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                        <i class="fas fa-edit text-gray-600"></i>
+                    </button>
+                    <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                        <i class="fas fa-trash-alt text-gray-600"></i>
+                    </button>
+                </div>
             </div>
             <div class="custom-top">
                 <img class="w-64 rounded shadow-lg" src="{{ $media->imageUrl }}" alt="poster">

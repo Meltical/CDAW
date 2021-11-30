@@ -15,6 +15,8 @@ use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 |
 */
 
+/* PAGES */
+
 Route::get('template', function () {
     return view('template');
 });
@@ -63,3 +65,9 @@ Route::get('media/{id}', [listeMediasController::class, 'showMedia'])->where([
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+/* ********************************************** */
+
+/* Helper */
+
+Route::get('like/{id}', 'LikeController@likeService');
