@@ -28,16 +28,16 @@
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
             <div class="flex justify-between text-xl font-bold mb-6">
                 <h2>{{ $title }}</h2>
-                <a class="block px-3 py-2 rounded-lg bg-red-400 text-white" href="{{ route('createplaylistpage') }}">
-                    <i class="fas fa-plus"></i>
-                </a>
             </div>
 
-            <div class="flex flex-wrap gap-12">
-                @foreach ($playlists as $playlist)
-                <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}" subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}" route="{{ 'playlists' }}" />
-                @endforeach
-            </div>
+            <form class="flex flex-col bg-white p-12 rounded-lg w-96 mx-auto mt-36 shadow-lg" action="{{route('createplaylist')}}" method="post">
+                @csrf
+                <label for="playlist-title" class="hidden">
+                    playlist-title
+                </label>
+                <input id="playlist-title" name="playlist-title" class="border p-2 outline-none rounded" placeholder="your playlist title" type="text">
+                <button type="submit" class="p-2 mt-4 bg-red-400 rounded-md text-white hover:bg-red-500 hover:shadow-lg cursor-pointer">Create</button>
+            </form>
         </section>
     </div>
     <!-- Bootstrap core JS-->

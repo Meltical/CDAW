@@ -9,4 +9,5 @@ class Playlist extends Model
 {
     use HasFactory;
     protected $table = "playlists";
+    public $timestamps = false;
 }
