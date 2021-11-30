@@ -10,18 +10,20 @@ class card extends Component
     public $title;
     public $subtitle;
     public $image_url;
+    public $route;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id, $title, $subtitle, $image_url)
+    public function __construct($id, $title, $subtitle, $image_url, $route)
     {
         $this->id = $id;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->image_url = $image_url;
+        $this->route = $route;
     }
 
     /**

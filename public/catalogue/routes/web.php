@@ -55,6 +55,9 @@ Route::get('template', function () {
 
 Route::get('/', 'listeMediasController@showListeMedias');
 
+Route::get('playlists', 'listeMediasController@showPlaylistsMedias')->middleware('auth')->name("playlists");
+Route::get('playlists/{id}', 'listeMediasController@showPlaylist');
+
 Route::get('history', 'listeMediasController@showHistoryMedias')->middleware('auth')->name("history");
 
 Route::get('likes', 'listeMediasController@showLikedMedias')->middleware('auth')->name("likes");
