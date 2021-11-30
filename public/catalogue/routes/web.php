@@ -25,6 +25,8 @@ Route::get('/', 'listeMediasController@showListeMedias');
 
 Route::get('/user/history', 'listeMediasController@showHistoryMedias')->middleware('auth');
 
+Route::get('/user/liked', 'listeMediasController@showLikedMedias')->middleware('auth');
+
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware(['guest'])
     ->name('register');
