@@ -87,6 +87,7 @@ class listeMediasController extends Controller
     {
         $loggedUser = Auth::user();
         $media = Media::findOrFail($id);
+        $tags = Tag::where("media_id", "=", $id)->get();
         if ($loggedUser) {
             $userId = $loggedUser->id;
             $likedMedia = Like::select('*')
@@ -94,12 +95,11 @@ class listeMediasController extends Controller
                 ->where('user_id', '=', $userId)
                 ->get();
             if (count($likedMedia)) {
-                return view('details')->with('media', $media)->with('isLiked', true);
+                return view('details')->with('media', $media)->with('isLiked', true)->with('tags', $tags);
             } else {
-                return view('details')->with('media', $media)->with('isLiked', false);
+                return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
             }
         }
-        $tags = Tag::where("media_id", "=", $id)->get();
         return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
     }
 
