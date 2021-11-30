@@ -15,32 +15,9 @@ use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 |
 */
 
-/* PAGES */
-
-Route::get('template', function () {
-    return view('template');
-});
-
-Route::get('/', 'listeMediasController@showListeMedias');
-
-Route::get('/user/history', 'listeMediasController@showHistoryMedias')->middleware('auth');
-
-Route::get('/register', [RegisteredUserController::class, 'create'])
-    ->middleware(['guest'])
-    ->name('register');
-
 Route::get('create', function () {
     return view('create');
 });
-
-Route::get('profile', function () {
-    return view('profile');
-})->middleware('auth');
-
-Route::get('/details/{id}', 'listeMediasController@showMedia');
-
-
-Route::get('listeMedias', [listeMediasController::class, 'showListeMedias']);
 
 Route::delete('delete/{id}', [
     listeMediasController::class,
@@ -69,6 +46,30 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 /* ********************************************** */
+
+/* Routes */
+
+Route::get('template', function () {
+    return view('template');
+});
+
+Route::get('/', 'listeMediasController@showListeMedias');
+
+Route::get('history', 'listeMediasController@showHistoryMedias')->middleware('auth')->name("history");
+
+Route::get('likes', 'listeMediasController@showLikedMedias')->middleware('auth')->name("likes");
+
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->middleware(['guest'])
+    ->name('register');
+
+Route::get('profile', function () {
+    return view('profile');
+})->middleware('auth')->name("profile");
+
+Route::get('/details/{id}', 'listeMediasController@showMedia');
+
+Route::get('listeMedias', [listeMediasController::class, 'showListeMedias']);
 
 /* Helper */
 

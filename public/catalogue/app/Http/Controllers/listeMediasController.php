@@ -28,6 +28,16 @@ class listeMediasController extends Controller
         return view('home')->with('medias', $medias)->with('title', "History");
     }
 
+    public function showLikedMedias()
+    {
+        $userId = auth()->user()->id;
+        $medias = Like::where("user_id", "=", $userId)
+            ->join("medias", "medias.id", "=", "like.media_id")
+            ->orderBy("like.created_at", "desc")
+            ->get();
+        return view('home')->with('medias', $medias)->with('title', "Likes");
+    }
+
     public function showAddMedia()
     {
         $categories = category::all();

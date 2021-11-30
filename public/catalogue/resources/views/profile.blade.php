@@ -13,7 +13,8 @@
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
@@ -22,42 +23,18 @@
 <body>
     <div class="flex">
         <!-- sidebar -->
-        <section class="flex flex-col h-screen">
-            <div class="flex justify-center items-center h-64 border">
-                <div class="flex flex-col justify-center items-center">
-                    <div class="w-20 h-20 rounded-full mb-4 profile"></div>
-                    <span>Komi</span>
-                </div>
-            </div>
-            <div class="flex flex-grow justify-center border-r">
-                <div class="p-14">
-                    <ul class="flex flex-col gap-4 whitespace-nowrap">
-                        <li>
-                            <a class="text-red-500 text-lg font-bold" href="#">Discover</a>
-                        </li>
-                        <li>
-                            <a href="#">Library</a>
-                        </li>
-                        <li>
-                            <a href="#">Notification</a>
-                        </li>
-                        <li>
-                            <a href="#">Settings</a>
-                        </li>
-                        <li>
-                            <a class="text-sm text-gray-700 italic" href="#">Help and feedback</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <x-navbar />
         <!-- main content-->
         <section class="h-screen flex justify-center gap-32 flex-grow p-10 bg-gray-100">
             <div>
-                <img class="profile-cover-image border rounded-t-2xl shadow-xl object-cover" src="https://furansujapon.com/wp-content/uploads/2021/05/Komi-san-wa-Komyushou-Desu.jpg" alt="cover">
+                <img class="profile-cover-image border rounded-t-2xl shadow-xl object-cover"
+                    src="https://furansujapon.com/wp-content/uploads/2021/05/Komi-san-wa-Komyushou-Desu.jpg"
+                    alt="cover">
                 <div class="flex justify-between my-4">
                     <div class="flex gap-6">
-                        <img class="rounded-full border-4 border-white ml-3 -mt-16 w-36 h-36 object-cover" src="https://45secondes.fr/wp-content/uploads/2021/05/Y-aura-t-il-Komi-san-wa-Comyushou-Anime-Adaptation-Tout-ce-que.png" alt="komi profile">
+                        <img class="rounded-full border-4 border-white ml-3 -mt-16 w-36 h-36 object-cover"
+                            src="https://45secondes.fr/wp-content/uploads/2021/05/Y-aura-t-il-Komi-san-wa-Comyushou-Anime-Adaptation-Tout-ce-que.png"
+                            alt="komi profile">
                         <div>
                             <span class="block font-bold text-2xl text-gray-800">Victor Deliege</span>
                             <span class="block text-gray-600 text-sm">victor.deliege@etu.imt-nord-europe.fr</span>
@@ -75,14 +52,16 @@
                     </div>
                     <i class="fas fa-arrow-right text-lg text-gray-600"></i>
                 </a>
-                <a href="#" class="block flex justify-between items-center bg-white rounded-lg mt-6 p-6 shadow-md">
+                <a href="{{ route('likes') }}"
+                    class="block flex justify-between items-center bg-white rounded-lg mt-6 p-6 shadow-md">
                     <div class="flex items-center gap-4">
                         <i class="fas fa-heart text-lg text-red-400"></i>
                         <span class="font-bold text-gray-700">Liked</span>
                     </div>
                     <i class="fas fa-arrow-right text-lg text-gray-600"></i>
                 </a>
-                <a href="#" class="block flex justify-between items-center bg-white rounded-lg mt-6 p-6 shadow-md">
+                <a href="{{ route('history') }}"
+                    class="block flex justify-between items-center bg-white rounded-lg mt-6 p-6 shadow-md">
                     <div class="flex items-center gap-4">
                         <i class="fas fa-history text-lg text-yellow-400"></i>
                         <span class="font-bold text-gray-700">History</span>
