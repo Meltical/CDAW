@@ -7,6 +7,8 @@ use App\Models\Like;
 use App\Models\Tag;
 use App\Models\category;
 use App\Models\History;
+use App\Models\MediaPlaylist;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +28,27 @@ class listeMediasController extends Controller
             ->orderBy("history.created_at", "desc")
             ->get();
         return view('home')->with('medias', $medias)->with('title', "History");
+    }
+
+    public function showPlaylistsMedias()
+    {
+        $playlists = Playlist::join("users", "users.id", "=", "playlists.author_id")
+            ->join("media_playlist", "media_playlist.playlist_id", "=", "playlists.id")
+            ->join("medias", "medias.id", "=", "media_playlist.media_id")
+            ->select("playlists.*", "users.name as authorName", "medias.imageUrl")
+            ->orderBy("media_playlist.created_at", "desc")
+            ->limit(1)
+            ->get();
+        return view('playlists')->with('playlists', $playlists)->with('title', "Playlists");
+    }
+
+    public function showPlaylist($id)
+    {
+        $medias = MediaPlaylist::join("medias", "medias.id", "=", "media_playlist.media_id")
+            ->orderBy("media_playlist.created_at", "desc")
+            ->get();
+        $name = Playlist::FindOrFail($id)->name;
+        return view('home')->with('medias', $medias)->with('title', $name);
     }
 
     public function showLikedMedias()

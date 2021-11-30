@@ -30,7 +30,7 @@
                      <a href="{{ route('likes') }}">Likes</a>
                  </li>
                  <li>
-                     <a href="#">Playlists</a>
+                     <a href="{{ route('playlists') }}">Playlists</a>
                  </li>
                  <li>
                      <a class="text-sm text-gray-700 italic" href="https://github.com/MikUwU/CDAW/issues"
