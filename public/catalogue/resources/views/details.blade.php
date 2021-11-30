@@ -13,7 +13,8 @@
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
@@ -25,7 +26,7 @@
         <x-navbar />
 
         <!-- main content-->
-        <section class="h-screen flex justify-center gap-32 flex-grow p-10 bg-gray-100">
+        <section class="h-auto flex justify-center gap-32 flex-grow p-10 bg-gray-100">
             <div class="w-1/2 custom-top">
                 <a class="flex gap-4 items-center" href="{{ URL::to('/') }}">
                     <i class="fas fa-chevron-left"></i>
@@ -33,10 +34,16 @@
                 </a>
                 <h1 class="text-3xl font-bold mt-8">{{ $media->title }}</h1>
                 <div class="my-4">
-                    <span class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">comedy</span>
-                    <span class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">school</span>
+                    @foreach ($tags as $tag)
+                        <span
+                            class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">{{ $tag->name }}</span>
+                    @endforeach
                 </div>
-                <p class="mb-10 leading-6 tracking-wider text-sm">{{ $media->description}}</p>
+               <p class="mb-4 leading-6 tracking-wider text-sm">
+                    @php
+                        echo $media->description;
+                    @endphp </p>
+                <p class="mb-10 text-sm text-gray-500">{{ $media->studio }}</p>
                 <div class="flex gap-2">
                     <a href="{{ $media->trailerUrl }}" target="_blank" class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
                         <i class="fas fa-play text-sm mr-3"></i>
