@@ -29,9 +29,9 @@
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
             <div class="flex justify-between text-xl font-bold mb-6">
                 <h2>{{ $title }}</h2>
-                <button>
+                <a href="{{ route('profile') }}">
                     <i class="fas fa-sliders-h text-red-600"></i>
-                </button>
+                </a>
             </div>
 
             <div class="flex flex-wrap gap-12">

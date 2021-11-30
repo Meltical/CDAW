@@ -35,7 +35,7 @@ class listeMediasController extends Controller
             ->join("medias", "medias.id", "=", "like.media_id")
             ->orderBy("like.created_at", "desc")
             ->get();
-        return view('home')->with('medias', $medias)->with('title', "Liked");
+        return view('home')->with('medias', $medias)->with('title', "Likes");
     }
 
     public function showAddMedia()

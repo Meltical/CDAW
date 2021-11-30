@@ -23,9 +23,9 @@ Route::get('template', function () {
 
 Route::get('/', 'listeMediasController@showListeMedias');
 
-Route::get('/user/history', 'listeMediasController@showHistoryMedias')->middleware('auth');
+Route::get('history', 'listeMediasController@showHistoryMedias')->middleware('auth')->name("history");
 
-Route::get('/user/liked', 'listeMediasController@showLikedMedias')->middleware('auth');
+Route::get('likes', 'listeMediasController@showLikedMedias')->middleware('auth')->name("likes");
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware(['guest'])
@@ -37,7 +37,7 @@ Route::get('create', function () {
 
 Route::get('profile', function () {
     return view('profile');
-})->middleware('auth');
+})->middleware('auth')->name("profile");
 
 Route::get('/details/{id}', 'listeMediasController@showMedia');
 
