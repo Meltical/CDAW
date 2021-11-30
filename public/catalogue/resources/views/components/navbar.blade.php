@@ -1,8 +1,19 @@
  <section class="flex flex-col h-screen">
      <div class="flex justify-center items-center h-64 border">
          <div class="flex flex-col justify-center items-center">
-             <div class="w-20 h-20 rounded-full mb-4 profile"></div>
-             <span>Komi</span>
+             @if(Auth::user())
+             <img class="w-20 h-20 object-cover rounded-full mb-4 " src="{{ Auth::user()->avatarUrl }}" alt="profile img">
+             <span>{{ Auth::user()->name }}</span>
+             <form action="{{ route('logout') }}" method="post">
+                 @csrf
+                 <button type="submit" class="text-sm underline text-gray-400 cursor-pointer">Logout</button>
+             </form>
+             @else
+             <div class="w-20 h-20 rounded-full bg-red-300 mb-4 flex justify-center items-center">
+                 <i class="fas fa-2x fa-user text-white"></i>
+             </div>
+             <a href="{{ route('login') }}" class="font-bold hover:underline cursor-pointer">Login</a>
+             @endif
          </div>
      </div>
      <div class="flex flex-grow justify-center border-r">
