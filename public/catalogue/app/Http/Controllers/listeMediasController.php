@@ -5,16 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Media;
 use App\Models\Tag;
 use App\Models\category;
+use App\Models\History;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Route;
 
 class listeMediasController extends Controller
 {
     public function showListeMedias()
     {
         $medias = Media::all();
-        return view('home')->with('medias', $medias);
+        return view('home')->with('medias', $medias)->with('title', "Curated For You");
+    }
+
+    public function showHistoryMedias()
+    {
+        $userId = auth()->user()->id;
+        $medias = History::where("user_id", "=", $userId)
+            ->join("medias", "medias.id", "=", "history.media_id")
+            ->orderBy("history.created_at", "desc")
+            ->get();
+        return view('home')->with('medias', $medias)->with('title', "History");
     }
 
     public function showAddMedia()
