@@ -39,10 +39,11 @@
                             class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">{{ $tag->name }}</span>
                     @endforeach
                 </div>
-                <p class="mb-10 leading-6 tracking-wider text-sm">
+                <p class="mb-4 leading-6 tracking-wider text-sm">
                     @php
                         echo $media->description;
                     @endphp </p>
+                <p class="mb-10 text-sm text-gray-500">{{ $media->studio }}</p>
                 <a href="{{ $media->trailerUrl }}" target="_blank"
                     class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
                     <i class="fas fa-play text-sm mr-3"></i>
