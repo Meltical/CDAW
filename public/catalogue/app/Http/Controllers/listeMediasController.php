@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Media;
+use App\Models\Tag;
 use App\Models\category;
 use Illuminate\Http\Request;
 
@@ -74,7 +75,8 @@ class listeMediasController extends Controller
     public function showMedia($id)
     {
         $media = Media::findOrFail($id);
-        return view('details')->with('media', $media);
+        $tags = Tag::where("media_id", "=", $id)->get();
+        return view('details')->with('media', $media)->with('tags', $tags);
     }
 
     public function deleteMedia($id)
