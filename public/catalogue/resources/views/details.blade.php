@@ -13,8 +13,7 @@
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-        type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
@@ -35,13 +34,12 @@
                 <h1 class="text-3xl font-bold mt-8">{{ $media->title }}</h1>
                 <div class="my-4">
                     @foreach ($tags as $tag)
-                        <span
-                            class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">{{ $tag->name }}</span>
+                    <span class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">{{ $tag->name }}</span>
                     @endforeach
                 </div>
-               <p class="mb-4 leading-6 tracking-wider text-sm">
+                <p class="mb-4 leading-6 tracking-wider text-sm">
                     @php
-                        echo $media->description;
+                    echo $media->description;
                     @endphp </p>
                 <p class="mb-10 text-sm text-gray-500">{{ $media->studio }}</p>
                 <div class="flex gap-2">
@@ -51,6 +49,7 @@
                             Watch Trailer {{ $isLiked }}
                         </span>
                     </a>
+                    @if ($isLoggedIn)
                     @if ($isLiked)
                     <a href="{{ action('LikeController@likeService', $media->id) }}" class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
                         <i class="fas fa-heart text-red-500"></i>
@@ -59,6 +58,7 @@
                     <a href="{{ action('LikeController@likeService', $media->id) }}" class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
                         <i class="far fa-heart text-gray-600"></i>
                     </a>
+                    @endif
                     @endif
                     <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
                         <i class="fas fa-edit text-gray-600"></i>

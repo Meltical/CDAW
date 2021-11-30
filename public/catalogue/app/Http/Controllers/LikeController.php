@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Like;
 use App\Models\Media;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -19,6 +20,7 @@ class LikeController extends Controller
     public function likeService($mediaId)
     {
         $loggedUser = Auth::user();
+        $tags = Tag::where("media_id", "=", $mediaId)->get();
         if ($loggedUser) {
             $userId = $loggedUser->id;
             $media = Media::findOrFail($mediaId);
@@ -29,13 +31,13 @@ class LikeController extends Controller
             if (count($likedMedia)) {
                 $likedId = $likedMedia[0]->id;
                 Like::find($likedId)->delete();
-                return redirect('details/' . $mediaId)->with('media', $media)->with('isLiked', true);
+                return redirect('details/' . $mediaId)->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
             } else {
                 $like = new Like;
                 $like->media_id = $mediaId;
                 $like->user_id = $userId;
                 $like->save();
-                return redirect('details/' . $mediaId)->with('media', $media)->with('isLiked', false);
+                return redirect('details/' . $mediaId)->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
             }
         }
     }

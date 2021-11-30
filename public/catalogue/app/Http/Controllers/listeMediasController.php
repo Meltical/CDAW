@@ -95,12 +95,12 @@ class listeMediasController extends Controller
                 ->where('user_id', '=', $userId)
                 ->get();
             if (count($likedMedia)) {
-                return view('details')->with('media', $media)->with('isLiked', true)->with('tags', $tags);
+                return view('details')->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
             } else {
-                return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
+                return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
             }
         }
-        return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
+        return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
     }
 
     public function deleteMedia($id)
