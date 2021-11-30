@@ -13,7 +13,8 @@
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
@@ -35,7 +36,8 @@
 
             <div class="flex flex-wrap gap-12">
                 @foreach ($medias as $media)
-                <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="studio" image_url="{{ $media->imageUrl }}" />
+                    <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
+                        image_url="{{ $media->imageUrl }}" />
                 @endforeach
             </div>
         </section>
