@@ -65,9 +65,10 @@
                             </a>
                         @endif
                     @endif
-                    <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                    <a href="{{ url('medias/update/' . $media->id) }}"
+                        class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
                         <i class="fas fa-edit text-gray-600"></i>
-                    </button>
+                    </a>
                     <form action="{{ url('medias/delete/' . $media->id) }}" method="post">
                         @csrf
                         @method('DELETE')

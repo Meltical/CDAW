@@ -67,7 +67,7 @@ class MediasController extends Controller
 
         Tag::insert($dataTags);
 
-        return redirect("/media/{$id}");
+        return redirect("/medias/{$id}");
     }
 
     public function deleteMedia($id)
@@ -89,32 +89,37 @@ class MediasController extends Controller
 
     public function showUpdateMedia($id)
     {
-        $categories = category::all();
-        $media = Media::getWithCategory($id)->firstOrFail();
-        $data = [
-            "categories" => $categories,
-            "media" => $media,
-        ];
-        return view('updatemedia')->with('data', $data);
+        $media = Media::findOrFail($id);
+        $tags = Tag::where("media_id", "=", $id)->get();
+        return view('updateMedia')->with('media', $media)->with('tags', $tags);
     }
 
     public static function updateMedia(Request $request, $id)
     {
-        $title = $request->input('titleMedia');
-        $description = $request->input('descriptionMedia');
+        $title = $request->input('title');
+        $description = $request->input('description');
         $imageUrl = $request->input('imageUrl');
-        $category = $request->input('category');
+        $trailerUrl = $request->input('trailerUrl');
+        $studio = $request->input('studio');
 
-        $data = [
+        $media = [
             'title' => $title,
             'description' => $description,
-            'image' => $imageUrl,
-            'category_id' => $category,
+            'imageUrl' => $imageUrl,
+            'trailerUrl' => $trailerUrl,
+            'studio' => $studio,
+            'type' => 'ANIME'
         ];
 
-        Media::whereId($id)->update($data);
+        $tags = Tag::where("media_id", "=", $id)->get();
+        foreach ($tags as $tag) {
+            $tag->name = $request->input('tag' . $tag->id);
+            $tag->save();
+        }
 
-        return redirect("/media/{$id}");
+        Media::whereId($id)->update($media);
+
+        return redirect("/medias/{$id}");
     }
 
     public function showMedia($id)
@@ -129,11 +134,11 @@ class MediasController extends Controller
                 ->where('user_id', '=', $userId)
                 ->get();
             if (count($likedMedia)) {
-                return view('details')->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('medias')->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
             } else {
-                return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('medias')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
             }
         }
-        return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
+        return view('medias')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
     }
 }
