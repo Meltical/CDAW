@@ -15,8 +15,8 @@ class CreateMediaPlaylistTable extends Migration
     {
         Schema::create('media_playlist', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("playlist_id")->constrained("playlists");
-            $table->foreignId("media_id")->constrained("medias");
+            $table->foreignId("media_id")->constrained("medias")->onDelete('cascade');
+            $table->foreignId("playlist_id")->constrained("playlists")->onDelete('cascade');
             $table->timestamps();
         });
     }
