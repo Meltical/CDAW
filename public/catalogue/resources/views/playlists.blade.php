@@ -13,7 +13,8 @@
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
@@ -28,14 +29,16 @@
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
             <div class="flex justify-between text-xl font-bold mb-6">
                 <h2>{{ $title }}</h2>
-                <a class="block px-3 py-2 rounded-lg bg-red-400 text-white" href="{{ route('createplaylistpage') }}">
+                <a class="block px-3 py-2 rounded-lg bg-red-400 text-white" href="{{ route('createplaylist') }}">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
 
             <div class="flex flex-wrap gap-12">
                 @foreach ($playlists as $playlist)
-                <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}" subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}" route="{{ 'playlists' }}" />
+                    <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}"
+                        subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}"
+                        route="{{ 'playlist' }}" />
                 @endforeach
             </div>
         </section>

@@ -30,7 +30,7 @@
                          <a class="@if (Route::currentRouteName() == 'history') text-red-500 text-lg font-bold @endif" href="{{ route('history') }}">History</a>
                      </li>
                      <li>
-                         <a class="@if (Route::currentRouteName() == 'likes') text-red-500 text-lg font-bold @endif" href="{{ route('likes') }}">Likes</a>
+                         <a class="@if (Route::currentRouteName() == 'like') text-red-500 text-lg font-bold @endif" href="{{ route('like') }}">Likes</a>
                      </li>
                      <li>
                          <a class="@if (Route::currentRouteName() == 'playlists') text-red-500 text-lg font-bold @endif" href="{{ route('playlists') }}">Playlists</a>

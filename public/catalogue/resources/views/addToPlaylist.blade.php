@@ -58,7 +58,7 @@
                 mediaId: mediaId
             }
             const csrf_token = (document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-            fetch("/catalogue/public/addtoplaylistmedia", {
+            fetch("/catalogue/public/playlist/add", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
