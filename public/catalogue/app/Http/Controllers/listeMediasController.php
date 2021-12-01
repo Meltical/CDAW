@@ -21,6 +21,54 @@ class listeMediasController extends Controller
         return view('home')->with('medias', $medias)->with('title', "Curated For You");
     }
 
+    public function showCreateMedia()
+    {
+        return view('createMedia');
+    }
+
+    public function createMedia(Request $request)
+    {
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $imageUrl = $request->input('imageUrl');
+        $trailerUrl = $request->input('trailerUrl');
+        $studio = $request->input('studio');
+
+        $tag1 = $request->input('tag1');
+        $tag2 = $request->input('tag2');
+        $tag3 = $request->input('tag3');
+
+        $dataMedia = [
+            'title' => $title,
+            'description' => $description,
+            'imageUrl' => $imageUrl,
+            'trailerUrl' => $trailerUrl,
+            'studio' => $studio,
+            'type' => 'ANIME'
+        ];
+
+        $id = Media::insertGetId($dataMedia);
+
+        $dataTags = [
+            [
+                'name' => $tag1,
+                'media_id' => $id
+            ],
+            [
+                'name' => $tag2,
+                'media_id' => $id
+            ],
+            [
+                'name' => $tag3,
+                'media_id' => $id
+            ],
+        ];
+
+        Tag::insert($dataTags);
+
+        return redirect("/media/{$id}");
+    }
+
     public function showHistoryMedias()
     {
         $userId = auth()->user()->id;
