@@ -1,7 +1,7 @@
 <div class="flex flex-row w-3/4 justify-between border-solid shadow rounded-lg p-4 bg-white">
     <!-- Author -->
     <div class="flex gap-4">
-        <img class="w-12 h-12 object-cover rounded-full mb-4" src="{{ Auth::user()->avatarUrl }}" />
+        <img class="w-12 h-12 object-cover rounded-full mb-4" src="{{ $author->avatarUrl }}" />
         <div class="flex flex-col">
             <span class="text-sm font-bold text-gray-800">{{ $author->name }}</span>
             <p class="flex-grow text-sm text-gray-700">
