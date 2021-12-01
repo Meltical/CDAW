@@ -9,7 +9,7 @@ use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class listeMediasController extends Controller
+class MediasController extends Controller
 {
     public function showListeMedias()
     {

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\listeMediasController;
+use App\Http\Controllers\MediasController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
 /*
@@ -20,24 +20,24 @@ Route::get('create', function () {
 });
 
 Route::delete('delete/{id}', [
-    listeMediasController::class,
+    MediasController::class,
     'deleteMedia',
 ])->where(['id' => '^\d+$']);
 
 Route::get('updateMedia/{id}', [
-    listeMediasController::class,
+    MediasController::class,
     'showUpdateMedia',
 ])->where(['id' => '^\d+$']);
 
 Route::post('updateMedia/{id}', [
-    listeMediasController::class,
+    MediasController::class,
     'updateMedia',
 ])->where(['id' => '^\d+$']);
 
-Route::get('addMedia', [listeMediasController::class, 'showAddMedia']);
-Route::post('addMedia', [listeMediasController::class, 'addMedia']);
+Route::get('addMedia', [MediasController::class, 'showAddMedia']);
+Route::post('addMedia', [MediasController::class, 'addMedia']);
 
-Route::get('media/{id}', [listeMediasController::class, 'showMedia'])->where([
+Route::get('media/{id}', [MediasController::class, 'showMedia'])->where([
     'id' => '^\d+$',
 ]);
 
@@ -53,11 +53,11 @@ Route::get('template', function () {
     return view('template');
 });
 
-Route::get('/', 'listeMediasController@showListeMedias')->name('home');
+Route::get('/', 'MediasController@showListeMedias')->name('home');
 
-Route::get('medias/create', 'listeMediasController@showCreateMedia')->name('medias.create');
-Route::post('medias/create', 'listeMediasController@createMedia');
-Route::delete('medias/delete/{id}', 'listeMediasController@deleteMedia');
+Route::get('medias/create', 'MediasController@showCreateMedia')->name('medias.create');
+Route::post('medias/create', 'MediasController@createMedia');
+Route::delete('medias/delete/{id}', 'MediasController@deleteMedia');
 
 Route::get('playlists', 'PlaylistController@showPlaylistsMedias')->middleware('auth')->name("playlists");
 Route::get('createplaylistspage', 'PlaylistController@createPlaylistPage')->middleware('auth')->name("createplaylistpage");
@@ -67,7 +67,7 @@ Route::get('playlists/{id}', 'PlaylistController@showPlaylist');
 
 Route::get('history', 'HistoryController')->middleware('auth')->name("history");
 
-Route::get('likes', 'listeMediasController@showLikedMedias')->middleware('auth')->name("likes");
+Route::get('likes', 'MediasController@showLikedMedias')->middleware('auth')->name("likes");
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->middleware(['guest'])
@@ -77,9 +77,9 @@ Route::get('profile', function () {
     return view('profile');
 })->middleware('auth')->name("profile");
 
-Route::get('/details/{id}', 'listeMediasController@showMedia');
+Route::get('/details/{id}', 'MediasController@showMedia');
 
-Route::get('listeMedias', [listeMediasController::class, 'showListeMedias']);
+Route::get('listeMedias', [MediasController::class, 'showListeMedias']);
 
 /* Helper */
 
