@@ -69,12 +69,17 @@
                             <i class="far fa-list-alt text-gray-600"></i>
                         </a>
                     @endif
-                    <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                    <a href="{{ url('medias/update/' . $media->id) }}"
+                        class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
                         <i class="fas fa-edit text-gray-600"></i>
-                    </button>
-                    <button class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                        <i class="fas fa-trash-alt text-gray-600"></i>
-                    </button>
+                    </a>
+                    <form action="{{ url('medias/delete/' . $media->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                            <i class="fas fa-trash-alt text-gray-600"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="custom-top">

@@ -15,8 +15,8 @@ class CreateLikeTable extends Migration
     {
         Schema::create('like', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("media_id")->constrained("medias");
-            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("media_id")->constrained("medias")->onDelete('cascade');
+            $table->foreignId("user_id")->constrained("users")->onDelete('cascade');
             $table->timestamps();
         });
     }
