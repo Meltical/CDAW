@@ -67,7 +67,7 @@ class PlaylistController extends Controller
         $mediaPlaylist->playlist_id = $request->input('playlistId');
         $mediaPlaylist->media_id = $request->input('mediaId');
         $mediaPlaylist->save();
-        return redirect("/playlists");
+        return view('createplaylist')->with('title', 'Create Playlist');
     }
 
     // My Playlists (Created by me)

@@ -7,6 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="playlist-route" content="{{ route('playlists') }}">
     <title>NetFloux</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -68,6 +69,11 @@
                 body: JSON.stringify(payload)
             }).then(res => {
                 console.log("Request complete! response:", res);
+            }).then(() => {
+                const playlist_route = (document.querySelector('meta[name="playlist-route"]').getAttribute(
+                    'content')); //this is not okay :(
+                window.location.replace(playlist_route);
+
             });
         }
     </script>
