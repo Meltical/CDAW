@@ -64,6 +64,10 @@
                                 <i class="far fa-heart text-gray-600"></i>
                             </a>
                         @endif
+                        <a href="{{ action('PlaylistController@addToPlaylistPage', $media->id) }}"
+                            class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                            <i class="far fa-list-alt text-gray-600"></i>
+                        </a>
                     @endif
                     <a href="{{ url('medias/update/' . $media->id) }}"
                         class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
