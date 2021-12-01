@@ -89,7 +89,17 @@
                 </div>
             </div>
 
-            <div class="flex flex-col items-center gap-6 mb-12">
+            <form action="{{ route('comment.store') }}" method="post" class="flex gap-4 w-3/4 mx-auto">
+                @csrf
+                <input name="text" placeholder="write a comment..."
+                    class="block outline-none rounded border shadow text-gray-700 flex-grow p-3" type="text">
+                <input type="text" name="media_id" value="{{ $media->id }}" class="hidden">
+                <button type="submit"
+                    class="p-4 text-white rounded-md font-bold text-sm bg-red-400 hover:bg-red-500">Send</button>
+
+            </form>
+
+            <div class="flex flex-col items-center gap-6 mt-6 mb-12">
                 @foreach ($comments as $comment)
                     <x-comment :comment="$comment" :author="App\Models\User::findOrFail($comment->user_id)" />
                 @endforeach

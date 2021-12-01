@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
@@ -12,6 +13,7 @@ Route::get('/', 'MediasController@showListeMedias')->name('home');
 Route::prefix('/media')->group(__DIR__ . '/web/media.php');
 Route::prefix('/playlist')->group(__DIR__ . '/web/playlist.php');
 Route::prefix('/like')->group(__DIR__ . '/web/like.php');
+Route::prefix('/comment')->group(__DIR__ . '/web/comment.php');
 
 Route::get('history', 'HistoryController')->middleware('auth')->name("history");
 

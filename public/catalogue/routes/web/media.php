@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$']);;
+Route::get('/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$'])->name("media.show");
 
 Route::get('create', 'MediasController@showCreateMedia')->name('medias.create');
 Route::post('create', 'MediasController@createMedia');

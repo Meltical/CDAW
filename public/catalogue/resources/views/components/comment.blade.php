@@ -16,7 +16,11 @@
         <div id="comment-{{ $comment->id }}"
             class="absolute hidden -left-10 z-10 rounded-lg px-5 py-3 text-sm text-gray-600 bg-white shadow-xl">
             <button>Modify</button>
-            <button class="text-red-500 mt-1">Delete</button>
+            <form action="{{ route('comment.delete', $comment->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-500 mt-1">Delete</button>
+            </form>
         </div>
     </div>
     <button id="bg-{{ $comment->id }}" onclick="toggle({{ $comment->id }})"
