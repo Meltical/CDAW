@@ -55,6 +55,9 @@ Route::get('template', function () {
 
 Route::get('/', 'listeMediasController@showListeMedias')->name('home');
 
+Route::get('medias/create', 'listeMediasController@showCreateMedia')->name('medias.create');
+Route::post('medias/create', 'listeMediasController@createMedia');
+
 Route::get('playlists', 'PlaylistController@showPlaylistsMedias')->middleware('auth')->name("playlists");
 Route::get('createplaylistspage', 'PlaylistController@createPlaylistPage')->middleware('auth')->name("createplaylistpage");
 Route::post('createplaylists', 'PlaylistController@createPlaylist')->middleware('auth')->name("createplaylist");

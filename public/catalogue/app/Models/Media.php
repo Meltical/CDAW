@@ -19,16 +19,6 @@ class Media extends Model
         return $this->belongsTo(category::class, "category_id");
     }
 
-    public static function create($data)
-    {
-        return DB::table('medias')->insertGetId([
-            'title' => $data["title"],
-            'description' => $data["description"],
-            'category_id' => $data["category_id"],
-            'imageUrl' => $data["imageUrl"]
-        ]);
-    }
-
     public static function getWithCategory($id)
     {
         return DB::table('medias')
