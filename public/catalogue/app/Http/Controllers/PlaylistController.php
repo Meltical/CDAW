@@ -61,6 +61,15 @@ class PlaylistController extends Controller
         return view('addToPlaylist')->with('playlists', $playlists)->with('mediaName', $mediaName);
     }
 
+    public function addMediaToPlaylist(Request $request)
+    {
+        $mediaPlaylist = new MediaPlaylist();
+        $mediaPlaylist->playlist_id = $request->input('playlistId');
+        $mediaPlaylist->media_id = $request->input('mediaId');
+        $mediaPlaylist->save();
+        return redirect("/playlists");
+    }
+
     // My Playlists (Created by me)
     public function showMyPlaylistsMedias()
     {

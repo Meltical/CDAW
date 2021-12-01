@@ -37,13 +37,21 @@
 
             <div class="flex flex-wrap gap-12">
                 @foreach ($playlists as $playlist)
-                    <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}"
-                        subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}"
-                        route="{{ 'playlists' }}" />
+                    <button class="text-left" onclick="postToPlaylist()">
+                        <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}"
+                            subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}"
+                            route="{{ 'playlists' }}" :isRedirect="false" />
+                    </button>
                 @endforeach
             </div>
         </section>
     </div>
+    <script>
+        function postToPlaylist() {
+            const playlistId = @json($playlist).id;
+            console.log(playlistId);
+        }
+    </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

@@ -11,19 +11,21 @@ class card extends Component
     public $subtitle;
     public $image_url;
     public $route;
+    public $isRedirect;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id, $title, $subtitle, $image_url, $route)
+    public function __construct($id, $title, $subtitle, $image_url, $route, $isRedirect = true)
     {
         $this->id = $id;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->image_url = $image_url;
         $this->route = $route;
+        $this->isRedirect = $isRedirect;
     }
 
     /**
