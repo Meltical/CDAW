@@ -45,20 +45,25 @@ class listeMediasController extends Controller
 
         $id = Media::insertGetId($dataMedia);
 
-        $dataTags = [
-            [
+        $dataTags = [];
+        if ($tag1 != null) {
+            array_push($dataTags, [
                 'name' => $tag1,
                 'media_id' => $id
-            ],
-            [
+            ],);
+        }
+        if ($tag2 != null) {
+            array_push($dataTags, [
                 'name' => $tag2,
                 'media_id' => $id
-            ],
-            [
+            ],);
+        }
+        if ($tag3 != null) {
+            array_push($dataTags, [
                 'name' => $tag3,
                 'media_id' => $id
-            ],
-        ];
+            ],);
+        }
 
         Tag::insert($dataTags);
 
