@@ -32,37 +32,37 @@
                     <i class="fas fa-chevron-left"></i>
                     <span class="block text-sm tracking-widest">BACK</span>
                 </a>
-                <h1 class="text-3xl font-bold my-8">Create a new Media</h1>
-                <form class="flex flex-row justify-center gap-6" id="createMedia" action="{{ url('#') }}"
-                    method="POST">
+                <h1 class="text-3xl font-bold my-8">Update a Media</h1>
+                <form class="flex flex-row justify-center gap-6" id="updateMedia"
+                    action="{{ url('medias/update/' . $media->id) }}" method="POST">
                     @csrf
                     <div class="flex flex-col justify-center gap-4 text-lg w-full flex-grow">
                         <label class="ml-4">Title</label>
                         <input class="mb-6 rounded h-12 shadow-lg" type="title" name="title" id="title"
-                            aria-describedby="title" placeholder="Title" />
+                            aria-describedby="title" placeholder="Title" value="{{ $media->title }}" />
                         <label class="ml-4">Description</label>
                         <textarea class="mb-6 rounded shadow-lg resize-none h-32" type="description" name="description"
-                            id="description" aria-describedby="description" placeholder="Description"></textarea>
+                            id="description" aria-describedby="description"
+                            placeholder="Description">{{ $media->description }}</textarea>
                         <label class="ml-4">Tag(s)</label>
-                        <input class="mb-2 rounded h-12 shadow-lg" type="tag1" name="tag1" id="tag1"
-                            aria-describedby="tag1" placeholder="Tag 1" />
-                        <input class="mb-2 rounded h-12 shadow-lg" type="tag2" name="tag2" id="tag2"
-                            aria-describedby="tag2" placeholder="Tag 2" />
-                        <input class="mb-2 rounded h-12 shadow-lg" type="tag3" name="tag3" id="tag3"
-                            aria-describedby="tag3" placeholder="Tag 3" />
+                        @foreach ($tags as $tag)
+                            <input class="mb-2 rounded h-12 shadow-lg" type="tag" name="{{ 'tag' . $tag->id }}" id="tag"
+                                aria-describedby="tag" placeholder="Tag" value="{{ $tag->name }}" />
+                        @endforeach
                     </div>
                     <div class="flex flex-col justify-center gap-4 text-lg w-full flex-grow">
                         <label class="ml-4">Studio</label>
                         <input class="mb-6 rounded h-12 shadow-lg" type="studio" name="studio" id="studio"
-                            aria-describedby="studio" placeholder="Studio" />
+                            aria-describedby="studio" placeholder="Studio" value="{{ $media->studio }}" />
                         <label class="ml-4">Image Url</label>
                         <input class="mb-6 rounded h-12 shadow-lg" type="imageUrl" name="imageUrl" id="imageUrl"
-                            aria-describedby="imageUrl" placeholder="Image Url" />
+                            aria-describedby="imageUrl" placeholder="Image Url" value="{{ $media->imageUrl }}" />
                         <label class="ml-4">Trailer Url</label>
                         <input class="mb-6 rounded h-12 shadow-lg" type="trailerUrl" name="trailerUrl" id="trailerUrl"
-                            aria-describedby="trailerUrl" placeholder="Trailer Url" />
+                            aria-describedby="trailerUrl" placeholder="Trailer Url"
+                            value="{{ $media->trailerUrl }}" />
                         <div class="flex justify-end">
-                            <input class="rounded w-32 h-12" type="submit" value="Create" />
+                            <input class="rounded w-32 h-12" type="submit" value="Save" />
                         </div>
                     </div>
                 </form>

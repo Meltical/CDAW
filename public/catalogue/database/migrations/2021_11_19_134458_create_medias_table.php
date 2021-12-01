@@ -16,10 +16,11 @@ class CreateMediasTable extends Migration
         Schema::create('medias', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->string("description");
-            $table->string("imageUrl");
-            $table->string("trailerUrl");
+            $table->text("description");
+            $table->text("imageUrl");
+            $table->string('trailerUrl')->nullable()->default('');
             $table->enum('type', ['Anime', 'Manga']);
+            $table->string('studio');
             $table->timestamps();
         });
     }

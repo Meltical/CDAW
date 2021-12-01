@@ -15,9 +15,8 @@ class CreateHistoryTable extends Migration
     {
         Schema::create('history', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("media_id")->constrained("medias");
-            $table->foreignId("user_id")->constrained("users");
-            $table->boolean('liked');
+            $table->foreignId("media_id")->constrained("medias")->onDelete('cascade');
+            $table->foreignId("user_id")->constrained("users")->onDelete('cascade');
             $table->timestamp('endTime');
             $table->timestamps();
         });
