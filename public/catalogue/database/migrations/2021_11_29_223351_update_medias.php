@@ -25,6 +25,8 @@ class UpdateMedias extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('medias', function (Blueprint $table) {
+            $table->dropColumn('studio');
+        });
     }
 }

@@ -25,6 +25,9 @@ class UpdateTags extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tags', function (Blueprint $table) {
+            $table->dropForeign(['media_id']);
+            $table->dropColumn("media_id");
+        });
     }
 }

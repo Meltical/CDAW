@@ -25,6 +25,8 @@ class UpdateDescription extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('medias', function (Blueprint $table) {
+            $table->string('description')->change();
+        });
     }
 }

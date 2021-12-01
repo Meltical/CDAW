@@ -70,6 +70,13 @@ class listeMediasController extends Controller
         return redirect("/media/{$id}");
     }
 
+    public function deleteMedia($id)
+    {
+        $media = Media::findOrFail($id);
+        $media->delete();
+        return redirect('/');
+    }
+
     public function showLikedMedias()
     {
         $userId = auth()->user()->id;
@@ -78,12 +85,6 @@ class listeMediasController extends Controller
             ->orderBy("like.created_at", "desc")
             ->get();
         return view('home')->with('medias', $medias)->with('title', "Likes");
-    }
-
-    public function showAddMedia()
-    {
-        $categories = category::all();
-        return view('addmedia')->with('categories', $categories);
     }
 
     public function showUpdateMedia($id)
@@ -95,25 +96,6 @@ class listeMediasController extends Controller
             "media" => $media,
         ];
         return view('updatemedia')->with('data', $data);
-    }
-
-    public function addMedia(Request $request)
-    {
-        $title = $request->input('titleMedia');
-        $description = $request->input('descriptionMedia');
-        $imageUrl = $request->input('imageUrl');
-        $category = $request->input('category');
-
-        $data = [
-            'title' => $title,
-            'description' => $description,
-            'image' => $imageUrl,
-            'category_id' => $category,
-        ];
-
-        $id = Media::create($data);
-
-        return redirect("/media/{$id}");
     }
 
     public static function updateMedia(Request $request, $id)
@@ -153,13 +135,5 @@ class listeMediasController extends Controller
             }
         }
         return view('details')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
-    }
-
-    public function deleteMedia($id)
-    {
-        $media = Media::findOrFail($id); //TODO: Support errors
-        $media->delete();
-        $medias = Media::with("category")->get();
-        return view('listemedias')->with('medias', $medias);
     }
 }

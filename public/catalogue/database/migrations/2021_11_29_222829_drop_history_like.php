@@ -26,6 +26,8 @@ class DropHistoryLike extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('history', function (Blueprint $table) {
+            $table->boolean('liked');
+        });
     }
 }
