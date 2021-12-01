@@ -51,7 +51,7 @@
                     </div>
                     <i class="fas fa-arrow-right text-lg text-gray-600"></i>
                 </a>
-                <a href="{{ route('likes') }}"
+                <a href="{{ route('like') }}"
                     class="block flex justify-between items-center bg-white rounded-lg mt-6 p-6 shadow-md">
                     <div class="flex items-center gap-4">
                         <i class="fas fa-heart text-lg text-red-400"></i>

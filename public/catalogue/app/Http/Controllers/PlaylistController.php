@@ -45,7 +45,7 @@ class PlaylistController extends Controller
         $newPlaylist->name = $title;
         $newPlaylist->author_id = Auth::user()->id;
         $newPlaylist->save();
-        return redirect("/playlists");
+        return redirect()->route('playlists');
     }
 
     public function addToPlaylistPage($id)
