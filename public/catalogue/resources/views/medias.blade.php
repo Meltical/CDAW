@@ -26,9 +26,8 @@
         <x-navbar />
 
         <!-- main content-->
-        <section class="h-auto flex flex-col justify-center gap-32 flex-grow p-10 bg-gray-100">
-            <div>
-
+        <section class="h-screen overflow-scroll bg-gray-100">
+            <div class="flex flex-row justify-center gap-32 flex-grow p-10">
                 <div class="w-1/2 custom-top">
                     <a class="flex gap-4 items-center" href="{{ URL::to('/') }}">
                         <i class="fas fa-chevron-left"></i>
@@ -89,7 +88,8 @@
                     <img class="w-64 rounded shadow-lg" src="{{ $media->imageUrl }}" alt="poster">
                 </div>
             </div>
-            <div class="flex flex-col">
+
+            <div class="flex flex-col items-center gap-6 mb-12">
                 @foreach ($comments as $comment)
                     <x-comment :comment="$comment" :author="App\Models\User::findOrFail($comment->user_id)" />
                 @endforeach
