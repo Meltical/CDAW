@@ -51,10 +51,10 @@ class PlaylistController extends Controller
     public function addToPlaylistPage($id)
     {
         $playlists = Playlist::join("users", "users.id", "=", "playlists.author_id")
-            ->join("media_playlist", "media_playlist.playlist_id", "=", "playlists.id")
-            ->join("medias", "medias.id", "=", "media_playlist.media_id")
+            ->leftJoin("media_playlist", "media_playlist.playlist_id", "=", "playlists.id")
+            ->leftJoin("medias", "medias.id", "=", "media_playlist.media_id")
             ->where("playlists.author_id", "=", Auth::user()->id)
-            ->select((DB::raw("playlists.*, users.name as authorName, MIN(medias.imageUrl) as imageUrl")))
+            ->select((DB::raw("playlists.*, users.name as authorName, MIN(medias.imageUrl) as imageUrl, COUNT(media_playlist.id) as size")))
             ->groupBy("playlists.id")
             ->get();
         $mediaName = Media::findOrFail($id)->title;

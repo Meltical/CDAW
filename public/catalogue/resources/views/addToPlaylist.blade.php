@@ -38,9 +38,10 @@
 
             <div class="flex flex-wrap gap-12">
                 @foreach ($playlists as $playlist)
-                    <button class="text-left" onclick="postToPlaylist()">
-                        <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}"
-                            subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}"
+                    <button class="text-left block flex" onclick="postToPlaylist({{ $playlist }})">
+                        <x-card class="card" id="{{ $playlist->id }}" title="{{ $playlist->name }}"
+                            subtitle="{{ $playlist->size }} anime"
+                            image_url="{{ $playlist->imageUrl ?? 'https://i.pinimg.com/originals/2a/0b/bf/2a0bbf93c3eabbb26537bf24c484a41b.jpg' }}"
                             route="{{ 'playlists' }}" :isRedirect="false" />
                     </button>
                 @endforeach
@@ -48,8 +49,8 @@
         </section>
     </div>
     <script>
-        async function postToPlaylist() {
-            const playlistId = @json($playlist).id;
+        function postToPlaylist(playlist) {
+            const playlistId = playlist.id;
             const mediaId = @json($mediaId);
             const payload = {
                 playlistId: playlistId,
