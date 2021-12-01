@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>NetFloux</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -47,9 +48,26 @@
         </section>
     </div>
     <script>
-        function postToPlaylist() {
+        async function postToPlaylist() {
             const playlistId = @json($playlist).id;
-            console.log(playlistId);
+            const mediaId = @json($mediaId);
+            const payload = {
+                playlistId: playlistId,
+                mediaId: mediaId
+            }
+            const csrf_token = (document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+            fetch("/catalogue/public/addtoplaylistmedia", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Accept": "application/json, text-plain, */*",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": csrf_token
+                },
+                body: JSON.stringify(payload)
+            }).then(res => {
+                console.log("Request complete! response:", res);
+            });
         }
     </script>
     <!-- Bootstrap core JS-->

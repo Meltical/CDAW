@@ -64,6 +64,7 @@ Route::post('createplaylists', 'PlaylistController@createPlaylist')->middleware(
 Route::get('user/playlists', 'PlaylistController@showMyPlaylistsMedias')->middleware('auth')->name("my_playlists");
 Route::get('playlists/{id}', 'PlaylistController@showPlaylist');
 Route::get('addtoplaylists/{id}', 'PlaylistController@addToPlaylistPage')->middleware('auth')->name("addToPlaylist");
+Route::post('addtoplaylistmedia', 'PlaylistController@addMediaToPlaylist')->middleware('auth')->name("addToPlaylistMedia");
 
 Route::get('history', 'HistoryController')->middleware('auth')->name("history");
 

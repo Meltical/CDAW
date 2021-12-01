@@ -58,7 +58,7 @@ class PlaylistController extends Controller
             ->groupBy("playlists.id")
             ->get();
         $mediaName = Media::findOrFail($id)->title;
-        return view('addToPlaylist')->with('playlists', $playlists)->with('mediaName', $mediaName);
+        return view('addToPlaylist')->with('playlists', $playlists)->with('mediaName', $mediaName)->with('mediaId', $id);
     }
 
     public function addMediaToPlaylist(Request $request)
