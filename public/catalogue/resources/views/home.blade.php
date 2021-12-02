@@ -37,10 +37,17 @@
             </div>
 
             <div class="flex flex-wrap gap-12">
-                @foreach ($medias as $media)
-                    <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
-                        image_url="{{ $media->imageUrl }}" route="{{ 'media' }}" />
-                @endforeach
+                @if (!empty($medias))
+                    <div>
+                        <img style="height: auto; width: 150px" src="{{ asset('img/empty.png') }}" />
+                        <p class="font-bold text-red-500 text-lg">No Entries...</p>
+                    </div>
+                @else
+                    @foreach ($medias as $media)
+                        <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
+                            image_url="{{ $media->imageUrl }}" route="{{ 'media' }}" />
+                    @endforeach
+                @endif
             </div>
         </section>
     </div>
