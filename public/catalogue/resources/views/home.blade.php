@@ -37,11 +37,8 @@
             </div>
 
             <div class="flex flex-wrap gap-12">
-                @if (!empty($medias))
-                    <div>
-                        <img style="height: auto; width: 150px" src="{{ asset('img/empty.png') }}" />
-                        <p class="font-bold text-red-500 text-lg">No Entries...</p>
-                    </div>
+                @if (!count($medias))
+                    <x-empty-page />
                 @else
                     @foreach ($medias as $media)
                         <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
