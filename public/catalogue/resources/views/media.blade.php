@@ -52,7 +52,7 @@
                             Watch Trailer
                         </span>
                     </a>
-                    @if ($isLoggedIn)
+                    @if (Auth::user() != null)
                         @if ($isLiked)
                             <a href="{{ action('LikeController@likeService', $media->id) }}"
                                 class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
@@ -69,17 +69,20 @@
                             <i class="far fa-list-alt text-gray-600"></i>
                         </a>
                     @endif
-                    <a href="{{ url('media/update/' . $media->id) }}"
-                        class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                        <i class="fas fa-edit text-gray-600"></i>
-                    </a>
-                    <form action="{{ url('media/delete/' . $media->id) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                            <i class="fas fa-trash-alt text-gray-600"></i>
-                        </button>
-                    </form>
+                    @if (Auth::user()?->isModerator())
+                        <a href="{{ url('media/update/' . $media->id) }}"
+                            class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                            <i class="fas fa-edit text-gray-600"></i>
+                        </a>
+                        <form action="{{ url('media/delete/' . $media->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                <i class="fas fa-trash-alt text-gray-600"></i>
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
             <div class="custom-top">

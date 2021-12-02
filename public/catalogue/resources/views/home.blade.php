@@ -29,9 +29,11 @@
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
             <div class="flex justify-between text-xl font-bold mb-6">
                 <h2>{{ $title }}</h2>
-                <a href="{{ route('media.create') }}">
-                    <i class="fas fa-plus"></i>
-                </a>
+                @if (Auth::user()?->isModerator())
+                    <a href="{{ route('media.create') }}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                @endif
             </div>
 
             <div class="flex flex-wrap gap-12">

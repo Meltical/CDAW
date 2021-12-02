@@ -134,11 +134,11 @@ class MediasController extends Controller
                 ->where('user_id', '=', $userId)
                 ->get();
             if (count($likedMedia)) {
-                return view('media')->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('media')->with('media', $media)->with('isLiked', true)->with('tags', $tags);
             } else {
-                return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
             }
         }
-        return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
+        return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
     }
 }
