@@ -11,7 +11,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/', 'MediasController@showListeMedias')->name('home');
 
 //Media
-Route::get('/media/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$']);
+Route::get('/media/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$'])->name('media.show');;
 Route::get('/media/create', 'MediasController@showCreateMedia')->middleware('role:Moderator')->name('media.create');
 Route::get('/media/update/{id}', 'MediasController@showUpdateMedia')->middleware('role:Moderator');
 
