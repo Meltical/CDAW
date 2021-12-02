@@ -35,11 +35,15 @@
             </div>
 
             <div class="flex flex-wrap gap-12">
-                @foreach ($playlists as $playlist)
-                    <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}"
-                        subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}"
-                        route="{{ 'playlist' }}" />
-                @endforeach
+                @if (empty($playlists))
+                    <x-empty-page />
+                @else
+                    @foreach ($playlists as $playlist)
+                        <x-card id="{{ $playlist->id }}" title="{{ $playlist->name }}"
+                            subtitle="{{ $playlist->authorName }}" image_url="{{ $playlist->imageUrl }}"
+                            route="{{ 'playlist' }}" />
+                    @endforeach
+                @endif
             </div>
         </section>
     </div>

@@ -53,7 +53,7 @@
                                 Watch Trailer
                             </span>
                         </a>
-                        @if ($isLoggedIn)
+                        @if (Auth::user() != null)
                             @if ($isLiked)
                                 <a href="{{ action('LikeController@likeService', $media->id) }}"
                                     class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
@@ -70,36 +70,35 @@
                                 <i class="far fa-list-alt text-gray-600"></i>
                             </a>
                         @endif
-                        <a href="{{ url('medias/update/' . $media->id) }}"
-                            class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                            <i class="fas fa-edit text-gray-600"></i>
-                        </a>
-                        <form action="{{ url('medias/delete/' . $media->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                                <i class="fas fa-trash-alt text-gray-600"></i>
-                            </button>
-                        </form>
+                        @if (Auth::user()?->isModerator())
+                            <a href="{{ url('media/update/' . $media->id) }}"
+                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                <i class="fas fa-edit text-gray-600"></i>
+                            </a>
+                            <form action="{{ url('media/delete/' . $media->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                    <i class="fas fa-trash-alt text-gray-600"></i>
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
                 <div class="custom-top">
                     <img class="w-64 rounded shadow-lg" src="{{ $media->imageUrl }}" alt="poster">
                 </div>
             </div>
-
-            <form action="{{ route('comment.store') }}" method="post" class="flex gap-4 w-3/4 mx-auto">
-                @csrf
-                <input name="text" placeholder="write a comment..."
-                    class="block outline-none rounded border shadow text-gray-700 flex-grow p-3" type="text">
-                <input type="text" name="media_id" value="{{ $media->id }}" class="hidden">
-                <button type="submit"
-                    class="p-4 text-white rounded-md font-bold text-sm bg-red-400 hover:bg-red-500">Send</button>
-
-            </form>
-
             <div class="flex flex-col items-center gap-6 mt-6 mb-12">
+                <form action="{{ route('comment.store') }}" method="post" class="flex gap-4 w-3/4 mx-auto">
+                    @csrf
+                    <input name="text" placeholder="write a comment..."
+                        class="block outline-none rounded border shadow text-gray-700 flex-grow p-3" type="text">
+                    <input type="text" name="media_id" value="{{ $media->id }}" class="hidden">
+                    <button type="submit"
+                        class="p-4 text-white rounded-md font-bold text-sm bg-red-400 hover:bg-red-500">Send</button>
+                </form>
                 @foreach ($comments as $comment)
                     <x-comment :comment="$comment" :author="App\Models\User::findOrFail($comment->user_id)" />
                 @endforeach
