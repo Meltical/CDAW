@@ -18,11 +18,7 @@ Route::get('/media/update/{id}', 'MediasController@showUpdateMedia')->middleware
 Route::post('/media/update/{id}', 'MediasController@updateMedia')->middleware('role:Moderator');
 Route::post('/media/create', 'MediasController@createMedia')->middleware('role:Moderator');
 
-<<<<<<< HEAD
-Route::get('/medias/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$']);;
-=======
 Route::delete('/media/delete/{id}', 'MediasController@deleteMedia')->middleware('role:Moderator');
->>>>>>> master
 
 
 //Playlist
