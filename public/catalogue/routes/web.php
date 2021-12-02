@@ -10,21 +10,21 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/', 'MediasController@showListeMedias')->name('home');
 
 //Media
-Route::get('/media/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$']);;
-Route::get('/media/create', 'MediasController@showCreateMedia')->middleware('auth')->name('media.create');
-Route::get('/media/update/{id}', 'MediasController@showUpdateMedia')->middleware('auth');
+Route::get('/media/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$']);
+Route::get('/media/create', 'MediasController@showCreateMedia')->middleware('role:Moderator')->name('media.create');
+Route::get('/media/update/{id}', 'MediasController@showUpdateMedia')->middleware('role:Moderator');
 
-Route::post('/media/update/{id}', 'MediasController@updateMedia')->middleware('auth');
-Route::post('/media/create', 'MediasController@createMedia')->middleware('auth');
+Route::post('/media/update/{id}', 'MediasController@updateMedia')->middleware('role:Moderator');
+Route::post('/media/create', 'MediasController@createMedia')->middleware('role:Moderator');
 
-Route::delete('/media/delete/{id}', 'MediasController@deleteMedia')->middleware('auth');
+Route::delete('/media/delete/{id}', 'MediasController@deleteMedia')->middleware('role:Moderator');
 
 
 //Playlist
 Route::get('/playlist', 'PlaylistController@showPlaylistsMedias')->middleware('auth')->name("playlists");
 Route::get('/playlist/create', 'PlaylistController@createPlaylistPage')->middleware('auth')->name("createplaylist");
 Route::get('/playlist/user', 'PlaylistController@showMyPlaylistsMedias')->middleware('auth')->name("my_playlists");
-Route::get('/playlist/{id}', 'PlaylistController@showPlaylist');
+Route::get('/playlist/{id}', 'PlaylistController@showPlaylist')->middleware('auth');
 Route::get('/playlist/add/{id}', 'PlaylistController@addToPlaylistPage')->middleware('auth')->name("addToPlaylist");
 
 Route::post('/playlist/add', 'PlaylistController@addMediaToPlaylist')->middleware('auth')->name("addToPlaylistMedia");
