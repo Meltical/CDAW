@@ -37,10 +37,14 @@
             </div>
 
             <div class="flex flex-wrap gap-12">
-                @foreach ($medias as $media)
-                    <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
-                        image_url="{{ $media->imageUrl }}" route="{{ 'media' }}" />
-                @endforeach
+                @if (!count($medias))
+                    <x-empty-page />
+                @else
+                    @foreach ($medias as $media)
+                        <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
+                            image_url="{{ $media->imageUrl }}" route="{{ 'media' }}" />
+                    @endforeach
+                @endif
             </div>
         </section>
     </div>
