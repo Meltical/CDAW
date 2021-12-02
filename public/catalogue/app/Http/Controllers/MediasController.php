@@ -127,7 +127,7 @@ class MediasController extends Controller
         $loggedUser = Auth::user();
         $media = Media::findOrFail($id);
         $tags = Tag::where("media_id", "=", $id)->get();
-        $comments = Comment::where("media_id", "=", $id)->get();
+        $comments = Comment::where("media_id", "=", $id)->orderBy('created_at', 'DESC')->get();
         if ($loggedUser) {
             $userId = $loggedUser->id;
             $likedMedia = Like::select('*')

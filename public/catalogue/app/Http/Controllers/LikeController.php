@@ -22,7 +22,7 @@ class LikeController extends Controller
     {
         $loggedUser = Auth::user();
         $tags = Tag::where("media_id", "=", $mediaId)->get();
-        $comments = Comment::where("media_id", "=", $mediaId)->get();
+        $comments = Comment::where("media_id", "=", $mediaId)->orderBy('created_at', 'DESC')->get();
         if ($loggedUser) {
             $userId = $loggedUser->id;
             $media = Media::findOrFail($mediaId);

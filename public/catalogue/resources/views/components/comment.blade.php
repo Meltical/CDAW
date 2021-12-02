@@ -3,7 +3,11 @@
     <div class="flex gap-4">
         <img class="w-12 h-12 object-cover rounded-full mb-4" src="{{ $author->avatarUrl }}" />
         <div class="flex flex-col">
-            <span class="text-sm font-bold text-gray-800">{{ $author->name }}</span>
+            <div class="flex gap-4">
+                <span class="text-sm font-bold text-gray-800">{{ $author->name }}</span>
+                <span
+                    class="text-sm text-gray-700">{{ date('d/m/Y H:i:s', strtotime($comment->created_at->setTimezone(new DateTimeZone('Europe/Paris')) . ' UTC')) }}</span>
+            </div>
             <p class="flex-grow text-sm text-gray-700">
                 {{ $comment->text }}
             </p>
