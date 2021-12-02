@@ -33,6 +33,14 @@
                     name="password_confirmation" required autocomplete="new-password" />
             </div>
 
+            <div class="flex flex-col mt-4" style="width: min-content">
+                <x-jet-label for="role" value="{{ __('Role') }}" />
+                <select class="rounded" id="role" name="role">
+                    <option value="User">User</option>
+                    <option value="Moderator">Moderator</option>
+                </select>
+            </div>
+
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-jet-label for="terms">
@@ -60,12 +68,5 @@
                 </x-jet-button>
             </div>
         </form>
-        <div class="flex justify-end mt-4">
-            <a href="{{ route('login') }}">
-                <x-jet-button>
-                    {{ __('Log In') }}
-                </x-jet-button>
-            </a>
-        </div>
     </x-jet-authentication-card>
 </x-guest-layout>

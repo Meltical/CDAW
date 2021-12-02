@@ -67,7 +67,7 @@ class MediasController extends Controller
 
         Tag::insert($dataTags);
 
-        return redirect("/medias/{$id}");
+        return redirect("/media/{$id}");
     }
 
     public function deleteMedia($id)
@@ -119,7 +119,7 @@ class MediasController extends Controller
 
         Media::whereId($id)->update($media);
 
-        return redirect("/medias/{$id}");
+        return redirect("/media/{$id}");
     }
 
     public function showMedia($id)
@@ -134,11 +134,11 @@ class MediasController extends Controller
                 ->where('user_id', '=', $userId)
                 ->get();
             if (count($likedMedia)) {
-                return view('medias')->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('media')->with('media', $media)->with('isLiked', true)->with('tags', $tags);
             } else {
-                return view('medias')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
             }
         }
-        return view('medias')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
+        return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
     }
 }

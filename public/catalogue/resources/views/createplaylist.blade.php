@@ -13,7 +13,8 @@
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
@@ -30,13 +31,16 @@
                 <h2>{{ $title }}</h2>
             </div>
 
-            <form class="flex flex-col bg-white p-12 rounded-lg w-96 mx-auto mt-36 shadow-lg" action="{{route('createplaylist')}}" method="post">
+            <form class="flex flex-col bg-white p-12 rounded-lg w-96 mx-auto mt-36 shadow-lg"
+                action="{{ route('createplaylist') }}" method="post">
                 @csrf
                 <label for="playlist-title" class="hidden">
                     playlist-title
                 </label>
-                <input id="playlist-title" name="playlist-title" class="border p-2 outline-none rounded" placeholder="your playlist title" type="text">
-                <button type="submit" class="p-2 mt-4 bg-red-400 rounded-md text-white hover:bg-red-500 hover:shadow-lg cursor-pointer">Create</button>
+                <input id="playlist-title" name="playlist-title" class="border p-2 outline-none rounded"
+                    placeholder="Playlist title..." type="text">
+                <button type="submit"
+                    class="p-2 mt-4 bg-red-400 rounded-md text-white hover:bg-red-500 hover:shadow-lg cursor-pointer">Create</button>
             </form>
         </section>
     </div>
