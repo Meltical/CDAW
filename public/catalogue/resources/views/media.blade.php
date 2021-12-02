@@ -26,67 +26,82 @@
         <x-navbar />
 
         <!-- main content-->
-        <section class="h-auto flex justify-center gap-32 flex-grow p-10 bg-gray-100">
-            <div class="w-1/2 custom-top">
-                <a class="flex gap-4 items-center" href="{{ URL::to('/') }}">
-                    <i class="fas fa-chevron-left"></i>
-                    <span class="block text-sm tracking-widest">BACK</span>
-                </a>
-                <h1 class="text-3xl font-bold mt-8">{{ $media->title }}</h1>
-                <div class="my-4">
-                    @foreach ($tags as $tag)
-                        <span
-                            class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">{{ $tag->name }}</span>
-                    @endforeach
-                </div>
-                <p class="mb-4 leading-6 tracking-wider text-sm">
-                    @php
-                        echo $media->description;
-                    @endphp </p>
-                <p class="mb-10 text-sm text-gray-500">{{ $media->studio }}</p>
-                <div class="flex gap-2">
-                    <a href="{{ $media->trailerUrl }}" target="_blank"
-                        class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
-                        <i class="fas fa-play text-sm mr-3"></i>
-                        <span class="text-sm">
-                            Watch Trailer
-                        </span>
+        <section class="h-screen overflow-scroll bg-gray-100">
+            <div class="flex flex-row justify-center gap-32 flex-grow p-10">
+                <div class="w-1/2 custom-top">
+                    <a class="flex gap-4 items-center" href="{{ URL::to('/') }}">
+                        <i class="fas fa-chevron-left"></i>
+                        <span class="block text-sm tracking-widest">BACK</span>
                     </a>
-                    @if (Auth::user() != null)
-                        @if ($isLiked)
-                            <a href="{{ action('LikeController@likeService', $media->id) }}"
+                    <h1 class="text-3xl font-bold mt-8">{{ $media->title }}</h1>
+                    <div class="my-4">
+                        @foreach ($tags as $tag)
+                            <span
+                                class="text-sm text-red-600 border-red-300 rounded border py-1 px-2">{{ $tag->name }}</span>
+                        @endforeach
+                    </div>
+                    <p class="mb-4 leading-6 tracking-wider text-sm">
+                        @php
+                            echo $media->description;
+                        @endphp </p>
+                    <p class="mb-10 text-sm text-gray-500">{{ $media->studio }}</p>
+                    <div class="flex gap-2">
+                        <a href="{{ $media->trailerUrl }}" target="_blank"
+                            class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
+                            <i class="fas fa-play text-sm mr-3"></i>
+                            <span class="text-sm">
+                                Watch Trailer
+                            </span>
+                        </a>
+                        @if (Auth::user() != null)
+                            @if ($isLiked)
+                                <a href="{{ action('LikeController@likeService', $media->id) }}"
+                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                    <i class="fas fa-heart text-red-500"></i>
+                                </a>
+                            @else
+                                <a href="{{ action('LikeController@likeService', $media->id) }}"
+                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                    <i class="far fa-heart text-gray-600"></i>
+                                </a>
+                            @endif
+                            <a href="{{ action('PlaylistController@addToPlaylistPage', $media->id) }}"
                                 class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                                <i class="fas fa-heart text-red-500"></i>
-                            </a>
-                        @else
-                            <a href="{{ action('LikeController@likeService', $media->id) }}"
-                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                                <i class="far fa-heart text-gray-600"></i>
+                                <i class="far fa-list-alt text-gray-600"></i>
                             </a>
                         @endif
-                        <a href="{{ action('PlaylistController@addToPlaylistPage', $media->id) }}"
-                            class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                            <i class="far fa-list-alt text-gray-600"></i>
-                        </a>
-                    @endif
-                    @if (Auth::user()?->isModerator())
-                        <a href="{{ url('media/update/' . $media->id) }}"
-                            class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                            <i class="fas fa-edit text-gray-600"></i>
-                        </a>
-                        <form action="{{ url('media/delete/' . $media->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
-                                <i class="fas fa-trash-alt text-gray-600"></i>
-                            </button>
-                        </form>
-                    @endif
+                        @if (Auth::user()?->isModerator())
+                            <a href="{{ url('media/update/' . $media->id) }}"
+                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                <i class="fas fa-edit text-gray-600"></i>
+                            </a>
+                            <form action="{{ url('media/delete/' . $media->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                    <i class="fas fa-trash-alt text-gray-600"></i>
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+                <div class="custom-top">
+                    <img class="w-64 rounded shadow-lg" src="{{ $media->imageUrl }}" alt="poster">
                 </div>
             </div>
-            <div class="custom-top">
-                <img class="w-64 rounded shadow-lg" src="{{ $media->imageUrl }}" alt="poster">
+            <div class="flex flex-col items-center gap-6 mt-6 mb-12">
+                <form action="{{ route('comment.store') }}" method="post" class="flex gap-4 w-3/4 mx-auto">
+                    @csrf
+                    <input name="text" placeholder="write a comment..."
+                        class="block outline-none rounded border shadow text-gray-700 flex-grow p-3" type="text">
+                    <input type="text" name="media_id" value="{{ $media->id }}" class="hidden">
+                    <button type="submit"
+                        class="p-4 text-white rounded-md font-bold text-sm bg-red-400 hover:bg-red-500">Send</button>
+                </form>
+                @foreach ($comments as $comment)
+                    <x-comment :comment="$comment" :author="App\Models\User::findOrFail($comment->user_id)" />
+                @endforeach
             </div>
         </section>
     </div>

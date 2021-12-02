@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Media;
 use App\Models\Like;
 use App\Models\Tag;
-use App\Models\category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -127,6 +127,7 @@ class MediasController extends Controller
         $loggedUser = Auth::user();
         $media = Media::findOrFail($id);
         $tags = Tag::where("media_id", "=", $id)->get();
+        $comments = Comment::where("media_id", "=", $id)->orderBy('created_at', 'DESC')->get();
         if ($loggedUser) {
             $userId = $loggedUser->id;
             $likedMedia = Like::select('*')
@@ -134,11 +135,11 @@ class MediasController extends Controller
                 ->where('user_id', '=', $userId)
                 ->get();
             if (count($likedMedia)) {
-                return view('media')->with('media', $media)->with('isLiked', true)->with('tags', $tags);
+                return view('media')->with('comments', $comments)->with('media', $media)->with('isLiked', true)->with('tags', $tags);
             } else {
-                return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
+                return view('media')->with('comments', $comments)->with('media', $media)->with('isLiked', false)->with('tags', $tags);
             }
         }
-        return view('media')->with('media', $media)->with('isLiked', false)->with('tags', $tags);
+        return view('media')->with('comments', $comments)->with('media', $media)->with('isLiked', false)->with('tags', $tags);
     }
 }
