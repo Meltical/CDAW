@@ -33,8 +33,9 @@
                     name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <div class="flex justify-end">
-                <select class="mt-4 rounded" id="role" name="role">
+            <div class="flex flex-col mt-4" style="width: min-content">
+                <x-jet-label for="role" value="{{ __('Role') }}" />
+                <select class="rounded" id="role" name="role">
                     <option value="User">User</option>
                     <option value="Moderator">Moderator</option>
                 </select>
