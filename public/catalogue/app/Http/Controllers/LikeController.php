@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Like;
 use App\Models\Media;
 use App\Models\Tag;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -21,6 +22,7 @@ class LikeController extends Controller
     {
         $loggedUser = Auth::user();
         $tags = Tag::where("media_id", "=", $mediaId)->get();
+        $comments = Comment::where("media_id", "=", $mediaId)->orderBy('created_at', 'DESC')->get();
         if ($loggedUser) {
             $userId = $loggedUser->id;
             $media = Media::findOrFail($mediaId);
@@ -31,13 +33,13 @@ class LikeController extends Controller
             if (count($likedMedia)) {
                 $likedId = $likedMedia[0]->id;
                 Like::find($likedId)->delete();
-                return redirect('medias/' . $mediaId)->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
+                return redirect('media/' . $mediaId)->with('comments', $comments)->with('media', $media)->with('isLiked', true)->with('tags', $tags);
             } else {
                 $like = new Like;
                 $like->media_id = $mediaId;
                 $like->user_id = $userId;
                 $like->save();
-                return redirect('medias/' . $mediaId)->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
+                return redirect('media/' . $mediaId)->with('comments', $comments)->with('media', $media)->with('isLiked', false)->with('tags', $tags);
             }
         }
     }

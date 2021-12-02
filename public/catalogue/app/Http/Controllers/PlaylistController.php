@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MediaPlaylist;
 use App\Models\Playlist;
+use App\Models\Media;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +45,29 @@ class PlaylistController extends Controller
         $newPlaylist->name = $title;
         $newPlaylist->author_id = Auth::user()->id;
         $newPlaylist->save();
-        return redirect("/playlists");
+        return redirect()->route('playlists');
+    }
+
+    public function addToPlaylistPage($id)
+    {
+        $playlists = Playlist::join("users", "users.id", "=", "playlists.author_id")
+            ->leftJoin("media_playlist", "media_playlist.playlist_id", "=", "playlists.id")
+            ->leftJoin("medias", "medias.id", "=", "media_playlist.media_id")
+            ->where("playlists.author_id", "=", Auth::user()->id)
+            ->select((DB::raw("playlists.*, users.name as authorName, MIN(medias.imageUrl) as imageUrl, COUNT(media_playlist.id) as size")))
+            ->groupBy("playlists.id")
+            ->get();
+        $mediaName = Media::findOrFail($id)->title;
+        return view('addToPlaylist')->with('playlists', $playlists)->with('mediaName', $mediaName)->with('mediaId', $id);
+    }
+
+    public function addMediaToPlaylist(Request $request)
+    {
+        $mediaPlaylist = new MediaPlaylist();
+        $mediaPlaylist->playlist_id = $request->input('playlistId');
+        $mediaPlaylist->media_id = $request->input('mediaId');
+        $mediaPlaylist->save();
+        return view('createplaylist')->with('title', 'Create Playlist');
     }
 
     // My Playlists (Created by me)

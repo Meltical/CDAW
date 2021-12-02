@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Media;
 use App\Models\Like;
 use App\Models\Tag;
-use App\Models\category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,7 +67,7 @@ class MediasController extends Controller
 
         Tag::insert($dataTags);
 
-        return redirect("/medias/{$id}");
+        return redirect("/media/{$id}");
     }
 
     public function deleteMedia($id)
@@ -119,7 +119,7 @@ class MediasController extends Controller
 
         Media::whereId($id)->update($media);
 
-        return redirect("/medias/{$id}");
+        return redirect("/media/{$id}");
     }
 
     public function showMedia($id)
@@ -127,6 +127,7 @@ class MediasController extends Controller
         $loggedUser = Auth::user();
         $media = Media::findOrFail($id);
         $tags = Tag::where("media_id", "=", $id)->get();
+        $comments = Comment::where("media_id", "=", $id)->orderBy('created_at', 'DESC')->get();
         if ($loggedUser) {
             $userId = $loggedUser->id;
             $likedMedia = Like::select('*')
@@ -134,11 +135,11 @@ class MediasController extends Controller
                 ->where('user_id', '=', $userId)
                 ->get();
             if (count($likedMedia)) {
-                return view('medias')->with('media', $media)->with('isLiked', true)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('media')->with('comments', $comments)->with('media', $media)->with('isLiked', true)->with('tags', $tags);
             } else {
-                return view('medias')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', true);
+                return view('media')->with('comments', $comments)->with('media', $media)->with('isLiked', false)->with('tags', $tags);
             }
         }
-        return view('medias')->with('media', $media)->with('isLiked', false)->with('tags', $tags)->with('isLoggedIn', false);
+        return view('media')->with('comments', $comments)->with('media', $media)->with('isLiked', false)->with('tags', $tags);
     }
 }
