@@ -47,7 +47,8 @@
                     <p class="mb-10 text-sm text-gray-500">{{ $media->studio }}</p>
                     <div class="flex gap-2">
                         <a href="{{ $media->trailerUrl }}" target="_blank"
-                            class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600">
+                            class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600"
+                            style="min-width: 10rem">
                             <i class="fas fa-play text-sm mr-3"></i>
                             <span class="text-sm">
                                 Watch Trailer
@@ -56,23 +57,27 @@
                         @if (Auth::user() != null)
                             @if ($isLiked)
                                 <a href="{{ action('LikeController@likeService', $media->id) }}"
-                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
+                                    style="min-width: 3rem">
                                     <i class="fas fa-heart text-red-500"></i>
                                 </a>
                             @else
                                 <a href="{{ action('LikeController@likeService', $media->id) }}"
-                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
+                                    style="min-width: 3rem">
                                     <i class="far fa-heart text-gray-600"></i>
                                 </a>
                             @endif
                             <a href="{{ action('PlaylistController@addToPlaylistPage', $media->id) }}"
-                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
+                                style="min-width: 3rem">
                                 <i class="far fa-list-alt text-gray-600"></i>
                             </a>
                         @endif
                         @if (Auth::user()?->isModerator())
                             <a href="{{ url('media/update/' . $media->id) }}"
-                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow">
+                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
+                                style="min-width: 3rem">
                                 <i class="fas fa-edit text-gray-600"></i>
                             </a>
                             <form action="{{ url('media/delete/' . $media->id) }}" method="post">
