@@ -55,19 +55,24 @@
                             </span>
                         </a>
                         @if (Auth::user() != null)
-                            @if ($isLiked)
-                                <a href="{{ action('LikeController@likeService', $media->id) }}"
-                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
-                                    style="min-width: 3rem">
+                            <a href="{{ action('HistoryController@store', $media->id) }}"
+                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
+                                style="min-width: 3rem">
+                                @if (App\Models\History::where('media_id', '=', $media->id)->where('user_id', '=', Auth::user()->id)->exists())
+                                    <i class="far fa-eye text-red-500"></i>
+                                @else
+                                    <i class="far fa-eye text-gray-600"></i>
+                                @endif
+                            </a>
+                            <a href="{{ action('LikeController@likeService', $media->id) }}"
+                                class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
+                                style="min-width: 3rem">
+                                @if ($isLiked)
                                     <i class="fas fa-heart text-red-500"></i>
-                                </a>
-                            @else
-                                <a href="{{ action('LikeController@likeService', $media->id) }}"
-                                    class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
-                                    style="min-width: 3rem">
+                                @else
                                     <i class="far fa-heart text-gray-600"></i>
-                                </a>
-                            @endif
+                                @endif
+                            </a>
                             <a href="{{ action('PlaylistController@addToPlaylistPage', $media->id) }}"
                                 class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
                                 style="min-width: 3rem">
