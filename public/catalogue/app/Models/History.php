@@ -9,4 +9,8 @@ class History extends Model
 {
     use HasFactory;
     protected $table = "history";
+    protected $fillable = [
+        'media_id',
+        'user_id',
+    ];
 }
