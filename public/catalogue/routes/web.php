@@ -40,7 +40,7 @@ Route::get('/like', 'MediasController@showLikedMedias')->middleware('auth')->nam
 //Comment
 Route::post('/create', 'CommentController@store')->middleware('auth')->name("comment.store");
 
-Route::delete('/delete/{id}', 'CommentController@delete')->middleware('auth')->name("comment.delete");
+Route::delete('/delete/{id}', 'CommentController@delete')->middleware('role:Moderator')->name("comment.delete");
 
 
 //Other

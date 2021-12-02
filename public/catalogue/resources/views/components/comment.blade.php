@@ -13,19 +13,21 @@
             </p>
         </div>
     </div>
-    <div class="relative">
-        <button onclick="toggle({{ $comment->id }})">
-            <i class="fas fa-ellipsis-v text-gray-600"></i>
-        </button>
-        <div id="comment-{{ $comment->id }}"
-            class="absolute hidden -left-10 z-10 rounded-lg px-5 py-3 text-sm text-gray-600 bg-white shadow-xl">
-            <form action="{{ route('comment.delete', $comment->id) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-500 mt-1">Delete</button>
-            </form>
+    @if (Auth::user()?->isModerator())
+        <div class="relative">
+            <button onclick="toggle({{ $comment->id }})">
+                <i class="fas fa-ellipsis-v text-gray-600"></i>
+            </button>
+            <div id="comment-{{ $comment->id }}"
+                class="absolute hidden -left-10 z-10 rounded-lg px-5 py-3 text-sm text-gray-600 bg-white shadow-xl">
+                <form action="{{ route('comment.delete', $comment->id) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-500 mt-1">Delete</button>
+                </form>
+            </div>
         </div>
-    </div>
+    @endif
     <button id="bg-{{ $comment->id }}" onclick="toggle({{ $comment->id }})"
         class=" h-screen hidden w-screen absolute top-0 left-0"></button>
 </div>
