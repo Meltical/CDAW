@@ -42,7 +42,7 @@
                     <button class="text-left block flex" onclick="postToPlaylist({{ $playlist }})">
                         <x-card class="card" id="{{ $playlist->id }}" title="{{ $playlist->name }}"
                             subtitle="{{ $playlist->size }} anime"
-                            image_url="{{ $playlist->imageUrl ?? 'https://i.pinimg.com/originals/2a/0b/bf/2a0bbf93c3eabbb26537bf24c484a41b.jpg' }}"
+                            image_url="{{ $playlist->imageUrl ?? asset('img/empty.png') }}"
                             route="{{ 'playlists' }}" :isRedirect="false" />
                     </button>
                 @endforeach
