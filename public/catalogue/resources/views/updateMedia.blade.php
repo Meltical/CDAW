@@ -34,7 +34,7 @@
                 </a>
                 <h1 class="text-3xl font-bold my-8">Update a Media</h1>
                 <form class="flex flex-row justify-center gap-6" id="updateMedia"
-                    action="{{ url('medias/update/' . $media->id) }}" method="POST">
+                    action="{{ url('media/update/' . $media->id) }}" method="POST">
                     @csrf
                     <div class="flex flex-col justify-center gap-4 text-lg w-full flex-grow">
                         <label class="ml-4">Title</label>
@@ -46,8 +46,8 @@
                             placeholder="Description">{{ $media->description }}</textarea>
                         <label class="ml-4">Tag(s)</label>
                         @foreach ($tags as $tag)
-                            <input class="mb-2 rounded h-12 shadow-lg" type="tag" name="{{ 'tag' . $tag->id }}" id="tag"
-                                aria-describedby="tag" placeholder="Tag" value="{{ $tag->name }}" />
+                            <input class="mb-2 rounded h-12 shadow-lg" type="tag" name="{{ 'tag' . $tag->id }}"
+                                id="tag" aria-describedby="tag" placeholder="Tag" value="{{ $tag->name }}" />
                         @endforeach
                     </div>
                     <div class="flex flex-col justify-center gap-4 text-lg w-full flex-grow">
