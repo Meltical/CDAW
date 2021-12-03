@@ -28,7 +28,10 @@
         <!-- main content-->
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
             <div class="flex justify-between text-xl font-bold mb-6">
-                <h2>{{ $title }}</h2>
+                <div class="flex gap-4">
+                    <h2>{{ $title }}</h2>
+                    <button onclick="search()" class="p-1 rounded text-sm text-white bg-red-300">search</button>
+                </div>
                 @if (Auth::user()?->isModerator())
                     <a href="{{ route('media.create') }}">
                         <i class="fas fa-plus"></i>
@@ -48,6 +51,11 @@
             </div>
         </section>
     </div>
+    <script>
+        function search() {
+            alert('Press ctrl+f to search')
+        }
+    </script>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
