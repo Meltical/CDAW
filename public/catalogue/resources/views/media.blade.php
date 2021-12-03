@@ -29,7 +29,7 @@
         <section class="h-screen overflow-scroll bg-gray-100">
             <div class="flex flex-row justify-center gap-32 flex-grow p-10">
                 <div class="w-1/2 custom-top">
-                    <a class="flex gap-4 items-center" href="{{ URL::to('/') }}">
+                    <a class="flex gap-4 items-center" href="{{ url()->previous() }}">
                         <i class="fas fa-chevron-left"></i>
                         <span class="block text-sm tracking-widest">BACK</span>
                     </a>
