@@ -27,6 +27,28 @@
 
         <!-- main content-->
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
+            <div class="flex justify-between text-xl font-bold mb-6">
+                <h2>Profile</h2>
+            </div>
+
+            <form action="{{ route('putprofileupdate') }}" method="POST" class="flex flex-col">
+                @csrf
+                @method('PUT')
+                <label class="font-bold text-gray-700" for="name">Name</label>
+                <input class="p-2 rounded-md outline-none border mb-6 w-96" id="name" name="name" type="text">
+                <label class="font-bold text-gray-700" for="email">Email</label>
+                <input class="p-2 rounded-md outline-none border mb-6 w-96" id="email" name="email" type="text">
+                <label class="font-bold text-gray-700" for="image">Profile image</label>
+                <input class="p-2 rounded-md outline-none border mb-6 w-96" id="image" name="image" type="text">
+                <label class="font-bold text-gray-700" for="banner">Banner image</label>
+                <input class="p-2 rounded-md outline-none border mb-6 w-96" id="banner" name="banner" type="text">
+                <label class="font-bold text-gray-700" for="password">Password</label>
+                <input class="p-2 rounded-md outline-none border mb-6 w-96" id="password" name="password" type="text">
+                <button
+                    class="w-36 hover:bg-red-500 hover:shadow-md rounded-md text-white text-sm font-bold bg-red-400 p-3"
+                    type="submit">submit</button>
+            </form>
+
 
         </section>
     </div>

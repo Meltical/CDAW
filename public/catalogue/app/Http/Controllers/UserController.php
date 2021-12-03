@@ -21,6 +21,8 @@ class UserController extends Controller
 
             $name = $request->get('name');
             $email = $request->get('email');
+            $image = $request->get('image');
+            $banner = $request->get('banner');
 
             if ($name != '') {
                 $user->name = $name;
@@ -30,7 +32,15 @@ class UserController extends Controller
                 $user->email = $email;
             }
 
+            if ($image != '') {
+                $user->avatarUrl = $image;
+            }
+
+            if ($banner != '') {
+                $user->bannerUrl = $banner;
+            }
             $user->save();
+            return redirect()->route('profile');
         }
 
         return response()->json(['user_updated' => true], 201);
