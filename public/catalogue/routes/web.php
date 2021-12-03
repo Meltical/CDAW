@@ -15,6 +15,7 @@ Route::get('/media/{id}', 'MediasController@showMedia')->where(['id' => '^\d+$']
 Route::get('/media/create', 'MediasController@showCreateMedia')->middleware('role:Moderator')->name('media.create');
 Route::get('/media/update/{id}', 'MediasController@showUpdateMedia')->where(['id' => '^\d+$'])->middleware('role:Moderator');
 
+Route::post('/media/search', 'MediasController@search')->name('media.search');
 Route::post('/media/update/{id}', 'MediasController@updateMedia')->where(['id' => '^\d+$'])->middleware('role:Moderator');
 Route::post('/media/create', 'MediasController@createMedia')->middleware('role:Moderator');
 
