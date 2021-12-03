@@ -54,3 +54,6 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::get('profile', function () {
     return view('profile');
 })->middleware('auth')->name("profile");
+
+Route::put('updateprofile', 'UserController@putUpdateUser')->middleware('auth')->name("putprofileupdate");
+Route::get('updateprofile', 'UserController@showUpdateUser')->middleware('auth')->name("showprofileupdate");

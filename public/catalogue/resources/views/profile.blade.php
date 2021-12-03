@@ -38,7 +38,8 @@
                             <span class="block text-gray-600 text-sm">{{ Auth::user()->email }}</span>
                         </div>
                     </div>
-                    <a href="{{ route('profile.show') }}" class="flex gap-3 justify-center items-center bg-red-600 h-8 px-3 rounded hover:shadow">
+                    <a href="{{ route('showprofileupdate') }}"
+                        class="flex gap-3 justify-center items-center bg-red-600 h-8 px-3 rounded hover:shadow">
                         <i class="fas fa-edit text-white text-sm"></i>
                         <span class="text-white text-sm">Edit Profile</span>
                     </a>
