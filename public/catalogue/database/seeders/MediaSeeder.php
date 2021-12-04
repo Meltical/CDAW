@@ -24,36 +24,41 @@ class MediaSeeder extends Seeder
         );
         $context  = stream_context_create($opts);
 
-        $json = file_get_contents("https://graphql.anilist.co/?query={%0A%20 Page(page%3A 1) {%0A%20%20%20 media(type%3A ANIME%2C sort%3A SCORE_DESC) {%0A%20%20%20%20%20 id%0A%20%20%20%20%20 title {%0A%20%20%20%20%20%20%20 english%0A%20%20%20%20%20%20%20 native%0A%20%20%20%20%20 }%0A%20%20%20%20%20 studios {%0A%20%20%20%20%20%20%20 nodes {%0A%20%20%20%20%20%20%20%20%20 name%0A%20%20%20%20%20%20%20 }%0A%20%20%20%20%20 }%0A%20%20%20%20%20 coverImage {%0A%20%20%20%20%20%20%20 large%0A%20%20%20%20%20 }%0A%20%20%20%20%20 trailer {%0A%20%20%20%20%20%20%20 id%0A%20%20%20%20%20 }%0A%20%20%20%20%20 description%0A%20%20%20%20%20 tags {%0A%20%20%20%20%20%20%20 name%0A%20%20%20%20%20 }%0A%20%20%20 }%0A%20 }%0A}%0A", false, $context);
-        $data = json_decode($json, true);
+        for ($i = 1; $i <= 5; $i++) {
+            $animes = [];
+            $tags = [];
+            $json = file_get_contents("https://graphql.anilist.co/?query={%0A%20 Page(page%3A " . $i . ") {%0A%20%20%20 media(type%3A ANIME%2C sort%3A SCORE_DESC) {%0A%20%20%20%20%20 id%0A%20%20%20%20%20 title {%0A%20%20%20%20%20%20%20 english%0A%20%20%20%20%20%20%20 native%0A%20%20%20%20%20 }%0A%20%20%20%20%20 studios {%0A%20%20%20%20%20%20%20 nodes {%0A%20%20%20%20%20%20%20%20%20 name%0A%20%20%20%20%20%20%20 }%0A%20%20%20%20%20 }%0A%20%20%20%20%20 coverImage {%0A%20%20%20%20%20%20%20 large%0A%20%20%20%20%20 }%0A%20%20%20%20%20 trailer {%0A%20%20%20%20%20%20%20 id%0A%20%20%20%20%20 }%0A%20%20%20%20%20 description%0A%20%20%20%20%20 tags {%0A%20%20%20%20%20%20%20 name%0A%20%20%20%20%20 }%0A%20%20%20 }%0A%20 }%0A}%0A", false, $context);
+            $data = json_decode($json, true);
 
-        $animes = [];
-        $tags = [];
-        if ($data["data"] != null) {
-            foreach ($data["data"]["Page"]["media"] as $item) {
-                array_push(
-                    $animes,
-                    [
-                        "id" => $item["id"],
-                        "title" => $item["title"]["english"] == null ? $item["title"]["native"] : $item["title"]["english"],
-                        "imageUrl" => $item["coverImage"]["large"],
-                        "trailerUrl" => $item["trailer"] == null ? "" : "https://youtu.be/" . $item["trailer"]["id"],
-                        "description" => $item["description"],
-                        "type" => 'ANIME',
-                        "studio" => $item["studios"]["nodes"][0]["name"]
-                    ]
-                );
-                $allTags =  array_slice($item["tags"], 0, 3);
-                foreach ($allTags as $tag) {
+            if ($data["data"] != null) {
+                foreach ($data["data"]["Page"]["media"] as $item) {
                     array_push(
-                        $tags,
+                        $animes,
                         [
-                            "media_id" => $item["id"],
-                            "name" => $tag["name"],
+                            "id" => $item["id"],
+                            "title" => $item["title"]["english"] == null ? $item["title"]["native"] : $item["title"]["english"],
+                            "imageUrl" => $item["coverImage"]["large"] ?? "",
+                            "trailerUrl" => $item["trailer"] == null ? "" : "https://youtu.be/" . $item["trailer"]["id"],
+                            "description" => $item["description"] ?? "",
+                            "type" => 'ANIME',
+                            "studio" => $item["studios"]["nodes"][0]["name"] ?? ""
                         ]
                     );
+                    $allTags =  array_slice($item["tags"], 0, 3);
+                    foreach ($allTags as $tag) {
+                        array_push(
+                            $tags,
+                            [
+                                "media_id" => $item["id"],
+                                "name" => $tag["name"],
+                            ]
+                        );
+                    }
                 }
             }
+
+            DB::table('medias')->insert($animes);
+            DB::table('tags')->insert($tags);
         }
 
         // $json = file_get_contents("https://graphql.anilist.co/?query={%0A%20 Page(page%3A 1) {%0A%20%20%20 media(type%3A MANGA%2C sort%3A SCORE_DESC) {%0A%20%20%20%20%20 id%0A%20%20%20%20%20 title {%0A%20%20%20%20%20%20%20 english%0A%20%20%20%20%20%20%20 native%0A%20%20%20%20%20 }%0A%20%20%20%20%20 coverImage {%0A%20%20%20%20%20%20%20 large%0A%20%20%20%20%20 }%0A%20%20%20%20%20 trailer{%0A%20%20%20%20%20%20%20 id%0A%20%20%20%20%20 }%0A%20%20%20%20%20 description%0A%20%20%20%20%20 tags {%0A%20%20%20%20%20%20%20 name%0A%20%20%20%20%20 }%0A%20%20%20 }%0A%20 }%0A}%0A", false, $context);
@@ -86,7 +91,5 @@ class MediaSeeder extends Seeder
         // }
 
         // DB::table('medias')->insert($mangas);
-        DB::table('medias')->insert($animes);
-        DB::table('tags')->insert($tags);
     }
 }

@@ -27,18 +27,12 @@
 
         <!-- main content-->
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
-            <form method="POST" action="{{ route('media.search') }}" class="flex mb-4 items-center w-3/4 ">
-                @csrf
-                <input type="text" class="w-full h-8 mr-4 rounded " name="search" placeholder="Search..."/>
-                <a onclick="searchMedias(event)" class="cursor-pointer">
-                    <i class="text-gray-500 fas fa-search"></i>
-                </a>
-            </form>
 
             <div class="flex justify-between text-xl font-bold mb-6">
                 <h2>{{ $title }}</h2>
                 @if (Auth::user()?->isModerator())
-                    <a href="{{ route('media.create') }}">
+                    <a class="flex justify-center items-center px-3 py-2 rounded-lg bg-red-400 text-white h-10 w-10"
+                        href="{{ route('media.create') }}">
                         <i class="fas fa-plus"></i>
                     </a>
                 @endif
@@ -49,7 +43,7 @@
                     <x-empty-page />
                 @else
                     @foreach ($medias as $media)
-                        <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
+                        <x-card id="{{ $media->id }}" :title="$media->title" subtitle="{{ $media->studio }}"
                             image_url="{{ $media->imageUrl }}" route="{{ 'media' }}" />
                     @endforeach
                 @endif
@@ -62,4 +56,5 @@
     <script src="js/scripts.js"></script>
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
+
 </html>
