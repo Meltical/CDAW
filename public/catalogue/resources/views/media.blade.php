@@ -46,14 +46,16 @@
                         @endphp </p>
                     <p class="mb-10 text-sm text-gray-500">{{ $media->studio }}</p>
                     <div class="flex gap-2">
-                        <a href="{{ $media->trailerUrl }}" target="_blank"
-                            class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600"
-                            style="min-width: 10rem">
-                            <i class="fas fa-play text-sm mr-3"></i>
-                            <span class="text-sm">
-                                Watch Trailer
-                            </span>
-                        </a>
+                        @if ($media->trailerUrl != null)
+                            <a href="{{ $media->trailerUrl }}" target="_blank"
+                                class="bg-red-500 rounded-lg px-6 py-3 text-white hover:shadow-lg hover:bg-red-600"
+                                style="min-width: 10rem">
+                                <i class="fas fa-play text-sm mr-3"></i>
+                                <span class="text-sm">
+                                    Watch Trailer
+                                </span>
+                            </a>
+                        @endif
                         @if (Auth::user() != null)
                             <a href="{{ action('HistoryController@store', $media->id) }}"
                                 class="flex justify-center items-center border border-gray-300 ml-3 rounded-full w-12 h-12 hover:shadow"
