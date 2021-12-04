@@ -30,6 +30,13 @@
 
             <div class="flex justify-between text-xl font-bold mb-6">
                 <h2>{{ $title }}</h2>
+                <form method="GET" action="{{ route('media.search') }}" class="flex mb-4 items-center w-3/4 ">
+                    @csrf
+                    <input type="text" class="w-full h-8 mr-4 rounded " name="search" placeholder="Search..." />
+                    <a onclick="searchMedias(event)" class="cursor-pointer">
+                        <i class="text-gray-500 fas fa-search"></i>
+                    </a>
+                </form>
                 @if (Auth::user()?->isModerator())
                     <a class="flex justify-center items-center px-3 py-2 rounded-lg bg-red-400 text-white h-10 w-10"
                         href="{{ route('media.create') }}">
