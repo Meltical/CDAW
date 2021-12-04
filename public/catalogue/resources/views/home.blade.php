@@ -38,6 +38,8 @@
                 @endif
             </div>
 
+            <h2 class="text-xl font-bold mb-6">{{ $title }}</h2>
+
             <div id="mediaContainer" class="flex flex-wrap gap-12">
                 @if (!count($medias))
                     <x-empty-page />
