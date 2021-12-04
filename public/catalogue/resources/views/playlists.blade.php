@@ -29,7 +29,8 @@
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
             <div class="flex justify-between text-xl font-bold mb-6">
                 <h2>{{ $title }}</h2>
-                <a class="block px-3 py-2 rounded-lg bg-red-400 text-white" href="{{ route('createplaylist') }}">
+                <a class="flex justify-center items-center px-3 py-2 rounded-lg bg-red-400 text-white h-10 w-10"
+                    href="{{ route('createplaylist') }}">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
