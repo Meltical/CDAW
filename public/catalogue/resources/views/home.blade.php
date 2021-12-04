@@ -44,13 +44,12 @@
                 @endif
             </div>
 
-
             <div id="mediaContainer" class="flex flex-wrap gap-12">
                 @if (!count($medias))
                     <x-empty-page />
                 @else
                     @foreach ($medias as $media)
-                        <x-card id="{{ $media->id }}" title="{{ $media->title }}" subtitle="{{ $media->studio }}"
+                        <x-card id="{{ $media->id }}" :title="$media->title" subtitle="{{ $media->studio }}"
                             image_url="{{ $media->imageUrl }}" route="{{ 'media' }}" />
                     @endforeach
                 @endif
