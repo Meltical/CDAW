@@ -143,10 +143,11 @@ class MediasController extends Controller
         return view('media')->with('comments', $comments)->with('media', $media)->with('isLiked', false)->with('tags', $tags);
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $string = $request->input('search');
-        $medias = Media::where('title', "like", "%".$string."%")
+        $medias = Media::where('title', "like", "%" . $string . "%")
             ->get();
-        return view('home')->with('medias', $medias)->with('title', "Result for : " . $string);
+        return view('home')->with('medias', $medias)->with('title', "Result" . (count($medias) > 1 ? "s" : "") . " for : " . $string);
     }
 }
