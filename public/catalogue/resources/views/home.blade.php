@@ -28,7 +28,7 @@
         <!-- main content-->
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
 
-            <div class="flex justify-between text-xl font-bold mb-6">
+            <div class="flex justify-between text-xl font-bold">
                 <form method="GET" action="{{ route('media.search') }}" class="flex mb-4 items-center w-3/4 ">
                     @csrf
                     <input type="text" class="w-full h-8 mr-4 rounded " name="search" placeholder="Search..." />
@@ -43,6 +43,8 @@
                     </a>
                 @endif
             </div>
+
+            <h2 class="text-xl font-bold mb-6">{{ $title }}</h2>
 
             <div id="mediaContainer" class="flex flex-wrap gap-12">
                 @if (!count($medias))
