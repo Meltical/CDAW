@@ -45,6 +45,10 @@ cd catalogue/
 composer update
 npm install
 ```
+- Donner les droits d'accès aux fichiers
+```bash
+chmod -R 777 .
+```
 - Lancer les migrations de BDD
 ```bash
 php artisan migrate
