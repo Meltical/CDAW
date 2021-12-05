@@ -26,7 +26,7 @@
         <x-navbar />
 
         <!-- main content-->
-        <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
+        <section class="h-screen w-full overflow-y-scroll flex-grow p-10 bg-gray-100">
 
             <div class="flex justify-between text-xl font-bold mb-6">
                 <form method="GET" action="{{ route('media.search') }}" class="flex mb-4 items-center w-3/4 ">
