@@ -40,6 +40,11 @@ Dans un bash du docker 'php-apache' :
 ```bash
 cd catalogue/
 ```
+- Mettre à jour le projet Laravel & les dependances
+```bash
+composer update
+npm install
+```
 - Lancer les migrations de BDD
 ```bash
 php artisan migrate
