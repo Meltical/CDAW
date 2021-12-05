@@ -29,7 +29,6 @@
         <section class="h-screen overflow-y-scroll flex-grow p-10 bg-gray-100">
 
             <div class="flex justify-between text-xl font-bold mb-6">
-                <h2>{{ $title }}</h2>
                 <form method="GET" action="{{ route('media.search') }}" class="flex mb-4 items-center w-3/4 ">
                     @csrf
                     <input type="text" class="w-full h-8 mr-4 rounded " name="search" placeholder="Search..." />
