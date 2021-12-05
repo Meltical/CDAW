@@ -30,6 +30,11 @@ git clone https://github.com/MikUwU/CDAW.git
 ```
 Lancer le docker
 
+Se connecter à la BDD à l'adresse :
+`http://localhost:8081/`
+Username: `root` Password: `root` 
+- Créer une nouvelle base de donnée `netfloux` en `utf8_general_ci`
+
 Dans un bash du docker 'php-apache' :
 - Accéder au dossier 'catalogue'
 ```bash
