@@ -12,7 +12,7 @@ Les fonctionnalités des utilisateurs non-connectés sont :
 - Consulter les médias
 
 Les fonctionnalités des utilisateurs connectés en tant que `Guest`, en plus des précédentes, sont :
-- Changer ses informations de profile
+- Changer ses informations de profil
 - Ajouter un commentaires
 - Aimer des médias
 - Créer/Gérer ses playlists
@@ -69,4 +69,4 @@ Username: `root` Password: `root`
 
 # Vidéo
 
-TODO
+https://youtu.be/2YnS9qZPDr8
